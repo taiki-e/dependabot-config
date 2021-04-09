@@ -1,0 +1,76 @@
+//! Structured access to the Dependabot configuration.
+//!
+//! ## Examples
+//!
+//! ```rust
+//! # fn dox() -> std::io::Result<()> {
+//! use std::fs;
+//!
+//! use dependabot_config::v2::Dependabot;
+//!
+//! let s = fs::read_to_string(".github/dependabot.yml")?;
+//! let dependabot: Dependabot = s.parse()?;
+//! for update in dependabot.updates {
+//!     println!("{:?}", update.package_ecosystem);
+//! }
+//! # Ok(())
+//! # }
+//! ```
+//!
+//! [dependabot]: https://docs.github.com/en/code-security/supply-chain-security/about-dependabot-version-updates
+
+#![doc(test(
+    no_crate_inject,
+    attr(
+        deny(warnings, rust_2018_idioms, single_use_lifetimes),
+        allow(dead_code, unused_variables)
+    )
+))]
+#![forbid(unsafe_code)]
+#![warn(
+    future_incompatible,
+    missing_copy_implementations,
+    missing_debug_implementations,
+    missing_docs,
+    rust_2018_idioms,
+    single_use_lifetimes,
+    unreachable_pub
+)]
+#![warn(clippy::default_trait_access)]
+
+mod error;
+
+#[cfg(test)]
+#[path = "gen/assert_impl.rs"]
+mod assert_impl;
+#[path = "gen/from_str.rs"]
+mod from_str;
+
+// TODO
+// pub mod v1;
+pub mod v2;
+
+use serde::{Deserialize, Serialize};
+
+pub use crate::error::Error;
+
+/// The Dependabot configuration.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(untagged)]
+#[non_exhaustive]
+pub enum Dependabot {
+    /// The Dependabot v2 configuration.
+    V2(v2::Dependabot),
+}
+
+impl ToString for Dependabot {
+    fn to_string(&self) -> String {
+        serde_yaml::to_string(&self).unwrap()
+    }
+}
+
+impl From<v2::Dependabot> for Dependabot {
+    fn from(v2: v2::Dependabot) -> Self {
+        Self::V2(v2)
+    }
+}

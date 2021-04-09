@@ -1,0 +1,410 @@
+# https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+
+---
+# Basic set up for three package managers
+
+version: 2
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  # Maintain dependencies for npm
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  # Maintain dependencies for Composer
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+---
+# Specify location of manifest files for each package manager
+
+version: 2
+updates:
+  - package-ecosystem: 'composer'
+    # Files stored in repository root
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  - package-ecosystem: 'npm'
+    # Files stored in `app` directory
+    directory: '/app'
+    schedule:
+      interval: 'daily'
+
+  - package-ecosystem: 'github-actions'
+    # Workflow files stored in the
+    # default location of `.github/workflows`
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+---
+# Set update schedule for each package manager
+
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: 'daily'
+
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      # Check for updates managed by Composer once a week
+      interval: 'weekly'
+
+---
+# Use `allow` to specify which dependencies to maintain
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      # Allow updates for Lodash
+      - dependency-name: 'lodash'
+      # Allow updates for React and any packages starting "react"
+      - dependency-name: 'react*'
+
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      # Allow both direct and indirect updates for all packages
+      - dependency-type: 'all'
+
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      # Allow only direct updates for
+      # Django and any packages starting "django"
+      - dependency-name: 'django*'
+        dependency-type: 'direct'
+      # Allow only production updates for Sphinx
+      - dependency-name: 'sphinx'
+        dependency-type: 'production'
+
+---
+# Specify assignees for pull requests
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Add assignees
+    assignees:
+      - 'octocat'
+
+---
+# Customize commit messages
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      # Prefix all commit messages with "npm"
+      prefix: 'npm'
+
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Prefix all commit messages with "Composer"
+    # include a list of updated dependencies
+    commit-message:
+      prefix: 'Composer'
+      include: 'scope'
+
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Include a list of updated dependencies
+    # with a prefix determined by the dependency group
+    commit-message:
+      prefix: 'pip prod'
+      prefix-development: 'pip dev'
+      include: 'scope'
+
+---
+# Use `ignore` to specify dependencies that should not be updated
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    ignore:
+      - dependency-name: 'express'
+        # For Express, ignore all updates for version 4 and 5
+        versions: ['4.x', '5.x']
+        # For Lodash, ignore all updates
+      - dependency-name: 'lodash'
+---
+# Allow external code execution when updating dependencies from private registries
+
+version: 2
+registries:
+  ruby-github:
+    type: rubygems-server
+    url: https://rubygems.pkg.github.com/octocat/github_api
+    token: ${{secrets.MY_GITHUB_PERSONAL_TOKEN}}
+updates:
+  - package-ecosystem: 'bundler'
+    directory: '/rubygems-server'
+    insecure-external-code-execution: allow
+    registries: '*'
+    schedule:
+      interval: 'monthly'
+
+---
+# Specify labels for pull requests
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Specify labels for npm pull requests
+    labels:
+      - 'npm'
+      - 'dependencies'
+
+---
+# Specify a milestone for pull requests
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Associate pull requests with milestone "4"
+    milestone: 4
+
+---
+# Specify the number of open pull requests allowed
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Disable version updates for npm dependencies
+    open-pull-requests-limit: 0
+
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Allow up to 10 open pull requests for pip dependencies
+    open-pull-requests-limit: 10
+
+---
+# Specify a different separator for branch names
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    pull-request-branch-name:
+      # Separate sections of the branch name with a hyphen
+      # for example, `dependabot-npm_and_yarn-next_js-acorn-6.4.1`
+      separator: '-'
+
+---
+# Disable automatic rebasing
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Disable rebasing for npm pull requests
+    rebase-strategy: 'disabled'
+
+---
+# Allow {% data variables.product.prodname_dependabot %} to use one of the two defined private registries
+# when updating dependency versions for this ecosystem
+
+version: 2
+registries:
+  maven-github:
+    type: maven-repository
+    url: https://maven.pkg.github.com/octocat
+    token: ${{secrets.MY_GITHUB_PERSONAL_TOKEN}}
+  npm-npmjs:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    username: octocat
+    password: ${{secrets.MY_NPM_PASSWORD}}
+updates:
+  - package-ecosystem: 'gitsubmodule'
+    directory: '/'
+    registries:
+      - maven-github
+    schedule:
+      interval: 'monthly'
+
+---
+# Specify reviewers for pull requests
+
+version: 2
+updates:
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Add reviewers
+    reviewers:
+      - 'octocat'
+      - 'my-username'
+      - 'my-org/python-team'
+
+---
+# Specify the day for weekly checks
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      # Check for npm updates on Sundays
+      day: 'sunday'
+
+---
+# Set a time for checks
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      # Check for npm updates at 9am UTC
+      time: '09:00'
+
+---
+# Specify the timezone for checks
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '09:00'
+      # Use Japan Standard Time (UTC +09:00)
+      timezone: 'Asia/Tokyo'
+
+---
+# Specify a non-default branch for pull requests for pip
+
+version: 2
+updates:
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Raise pull requests for version updates
+    # to pip against the `develop` branch
+    target-branch: 'develop'
+    # Labels on pull requests for version updates only
+    labels:
+      - 'pip dependencies'
+
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      # Check for npm updates on Sundays
+      day: 'sunday'
+    # Labels on pull requests for security and version updates
+    labels:
+      - 'npm dependencies'
+
+---
+# Configure version updates for both dependencies defined in manifests and vendored dependencies
+
+version: 2
+updates:
+  - package-ecosystem: 'bundler'
+    # Raise pull requests to update vendored dependencies that are checked in to the repository
+    vendor: true
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+
+---
+# Customize the manifest version strategy
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Update the npm manifest file to relax
+    # the version requirements
+    versioning-strategy: widen
+
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Increase the version requirements for Composer
+    # only when required
+    versioning-strategy: increase-if-necessary
+
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Only allow updates to the lockfile for pip and
+    # ignore any version updates that affect the manifest
+    versioning-strategy: lockfile-only
+
+---
+# Minimal settings to update dependencies in one private registry
+
+version: 2
+registries:
+  dockerhub: # Define access for a private registry
+    type: docker-registry
+    url: registry.hub.docker.com
+    username: octocat
+    password: ${{secrets.DOCKERHUB_PASSWORD}}
+updates:
+  - package-ecosystem: 'docker'
+    directory: '/docker-registry/dockerhub'
+    registries:
+      - dockerhub # Allow version updates for dependencies in this registry
+    schedule:
+      interval: 'monthly'
