@@ -364,7 +364,16 @@ pub struct CommitMessage {
     pub prefix_development: Option<String>,
     /// Specify that any prefix is followed by a list of the dependencies updated in the commit.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub include: Option<String>,
+    pub include: Option<CommitMessageInclude>,
+}
+
+/// Specify that any prefix is followed by a list of the dependencies updated in the commit.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+#[non_exhaustive]
+pub enum CommitMessageInclude {
+    /// Specify that any prefix is followed by a list of the dependencies updated in the commit.
+    Scope,
 }
 
 /// Ignore certain dependencies or versions.

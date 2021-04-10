@@ -64,6 +64,12 @@ impl FromStr for v2::CommitMessage {
         serde_yaml::from_str(s).map_err(Error::new)
     }
 }
+impl FromStr for v2::CommitMessageInclude {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
 impl FromStr for v2::Ignore {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {

@@ -10,6 +10,10 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Add `v2::CommitMessageInclude`.
+
+- Change `v2::CommitMessage::include` field from `Option<String>` to `Option<v2::CommitMessageInclude>`
+
 ## [0.1.0] - 2021-04-09
 
 Initial release
