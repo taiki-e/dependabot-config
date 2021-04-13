@@ -1,0 +1,260 @@
+# https://dependabot.com/docs/config-file
+---
+version: 1
+update_configs:
+  # Keep package.json (& lockfiles) up to date as soon as
+  # new versions are published to the npm registry
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'live'
+  # Keep Dockerfile up to date, batching pull requests weekly
+  - package_manager: 'docker'
+    directory: '/'
+    update_schedule: 'weekly'
+
+---
+version: 1
+update_configs:
+  # Update your Gemfile (& lockfiles) as soon as
+  # new versions are published to the RubyGems registry
+  - package_manager: 'ruby:bundler'
+    directory: '/'
+    update_schedule: 'live'
+
+    # Apply default reviewer and label to created
+    # pull requests
+    default_reviewers:
+      - 'github-username'
+    default_labels:
+      - 'label-name'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'submodules'
+    directory: '/'
+    update_schedule: 'daily'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/app'
+    update_schedule: 'daily'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'monthly'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    target_branch: 'develop'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    default_reviewers:
+      - 'github_username1'
+      - 'github_username2'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    default_assignees:
+      - 'github_username1'
+      - 'github_username2'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    default_labels:
+      - 'dependencies'
+      - 'dependabot'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    default_milestone: 12
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    allowed_updates:
+      - match:
+          update_type: 'security'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    allowed_updates:
+      - match:
+          update_type: 'security'
+      - match:
+          dependency_name: 'lodash'
+      - match:
+          # Wildcards match unlimited arbitrary characters (or none)
+          dependency_name: 'react*'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    allowed_updates:
+      - match:
+          dependency_name: 'react'
+          dependency_type: 'direct'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    allowed_updates:
+      - match:
+          # Only includes indirect (aka transient/sub-dependencies) for
+          # supported package managers: ruby:bundler, python, php:composer, rust:cargo
+          update_type: 'all'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    allowed_updates:
+      - match:
+          dependency_type: 'development'
+          # Supported dependency types:
+          # - "development"
+          #   Development dependency group (supported by some package managers)
+          # - "production"
+          #   Production dependency group (supported by some package managers)
+          # - "direct"
+          #   Direct/top-level dependencies
+          # - "indirect"
+          #   Indirect/transient/sub-dependencies
+          # - "all"
+          update_type: 'all'
+          # Supported update types:
+          # - "security"
+          # - "all"
+      - match:
+          dependency_type: 'production'
+          update_type: 'security'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    ignored_updates:
+      - match:
+          dependency_name: 'express'
+          # The version_requirement specifies the versions to ignore.
+          # The range format is specific to the package manager
+          # (e.g., ^1.0.0 for JS, or ~> 2.0 for Ruby).
+          version_requirement: '4.x'
+      - match:
+          # Wildcards match unlimited arbitrary characters (or none)
+          dependency_name: 'aws*'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    automerged_updates:
+      - match:
+          dependency_type: 'development'
+          # Supported dependency types:
+          # - "development"
+          # - "production"
+          # - "all"
+          update_type: 'all'
+          # Supported updates to automerge:
+          # - "security:patch"
+          #   SemVer patch update that fixes a known security vulnerability
+          # - "semver:patch"
+          #   SemVer patch update, e.g. > 1.x && 1.0.1 to 1.0.3
+          # - "semver:minor"
+          #   SemVer minor update, e.g. > 1.x && 2.1.4 to 2.3.1
+          # - "in_range"
+          #   matching the version requirement in your package manifest
+          # - "all"
+      - match:
+          dependency_type: 'production'
+          update_type: 'semver:patch'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    automerged_updates:
+      - match:
+          dependency_name: 'puma'
+          update_type: 'semver:minor'
+      - match:
+          # Wildcards match unlimited arbitrary characters (or none)
+          dependency_name: 'rspec*'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    commit_message:
+      prefix: 'chore'
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    commit_message:
+      prefix: 'chore'
+      include_scope: true
+
+---
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'daily'
+    commit_message:
+      prefix: 'fix'
+      prefix_development: 'chore'
+      include_scope: true

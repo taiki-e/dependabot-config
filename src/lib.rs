@@ -38,8 +38,6 @@
 )]
 #![warn(clippy::default_trait_access)]
 
-mod error;
-
 #[cfg(test)]
 #[path = "gen/assert_impl.rs"]
 mod assert_impl;
@@ -47,7 +45,10 @@ mod assert_impl;
 mod from_str;
 
 // TODO
-// pub mod v1;
+// mod convert;
+mod error;
+
+pub mod v1;
 pub mod v2;
 
 use serde::{Deserialize, Serialize};
@@ -61,11 +62,19 @@ pub use crate::error::Error;
 pub enum Dependabot {
     /// The Dependabot v2 configuration.
     V2(v2::Dependabot),
+    /// The Dependabot v1 configuration.
+    V1(v1::Dependabot),
 }
 
 impl ToString for Dependabot {
     fn to_string(&self) -> String {
         serde_yaml::to_string(&self).unwrap()
+    }
+}
+
+impl From<v1::Dependabot> for Dependabot {
+    fn from(v1: v1::Dependabot) -> Self {
+        Self::V1(v1)
     }
 }
 

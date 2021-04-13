@@ -10,6 +10,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Support Dependabot v1 configuration file.
+
 - Add `v2::CommitMessageInclude`.
 
 - Change `v2::CommitMessage::include` field from `Option<String>` to `Option<v2::CommitMessageInclude>`
