@@ -84,6 +84,9 @@ const _: fn() = || {
     assert_send::<v2::Ignore>();
     assert_sync::<v2::Ignore>();
     assert_unpin::<v2::Ignore>();
+    assert_send::<v2::InsecureExternalCodeExecution>();
+    assert_sync::<v2::InsecureExternalCodeExecution>();
+    assert_unpin::<v2::InsecureExternalCodeExecution>();
     assert_send::<v2::PullRequestBranchName>();
     assert_sync::<v2::PullRequestBranchName>();
     assert_unpin::<v2::PullRequestBranchName>();

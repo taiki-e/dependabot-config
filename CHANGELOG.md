@@ -12,9 +12,11 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 - Support Dependabot v1 configuration file.
 
-- Add `v2::CommitMessageInclude`.
+- Add `v2::CommitMessageInclude` and `v2::InsecureExternalCodeExecution`.
 
 - Change `v2::CommitMessage::include` field from `Option<String>` to `Option<v2::CommitMessageInclude>`
+
+- Change `v2::Update::insecure_external_code_execution` field from `Option<String>` to `Option<v2::InsecureExternalCodeExecution>`
 
 ## [0.1.0] - 2021-04-09
 

@@ -154,6 +154,12 @@ impl FromStr for v2::Ignore {
         serde_yaml::from_str(s).map_err(Error::new)
     }
 }
+impl FromStr for v2::InsecureExternalCodeExecution {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
 impl FromStr for v2::PullRequestBranchName {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {

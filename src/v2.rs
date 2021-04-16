@@ -95,12 +95,8 @@ pub struct Update {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ignore: Option<Vec<Ignore>>,
     /// Allow or deny code execution in manifest files.
-    ///
-    /// See [GitHub Docs][docs] for more.
-    ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#insecure-external-code-execution
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub insecure_external_code_execution: Option<String>,
+    pub insecure_external_code_execution: Option<InsecureExternalCodeExecution>,
     /// Labels to set on pull requests.
     ///
     /// See [GitHub Docs][docs] for more.
@@ -397,6 +393,21 @@ impl Ignore {
     pub fn new(dependency_name: String) -> Self {
         Self { dependency_name, versions: None }
     }
+}
+
+/// Allow or deny code execution in manifest files.
+///
+/// See [GitHub Docs][docs] for more.
+///
+/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#insecure-external-code-execution
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+#[non_exhaustive]
+pub enum InsecureExternalCodeExecution {
+    /// Allow external code execution.
+    Allow,
+    /// Explicitly deny external code execution, irrespective of whether there is a registries setting for this update configuration.
+    Deny,
 }
 
 /// Change separator for pull request branch names.
