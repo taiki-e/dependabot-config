@@ -9,5 +9,5 @@ publish = false
 anyhow = "1"
 fs = { package = "fs-err", version = "2" }
 quote = "1"
-syn = { version = "1", features = ["full"] }
+syn = { version = "1", features = ["full", "visit-mut"] }
 walkdir = "2"
