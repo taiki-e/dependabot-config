@@ -46,7 +46,7 @@ mod display;
 #[path = "gen/from_str.rs"]
 mod from_str;
 
-// TODO
+// TODO: https://github.com/taiki-e/dependabot-config/issues/2
 // mod convert;
 mod error;
 
