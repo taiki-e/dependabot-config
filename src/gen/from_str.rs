@@ -10,6 +10,102 @@ impl FromStr for Dependabot {
         serde_yaml::from_str(s).map_err(Error::new)
     }
 }
+impl FromStr for v1::Dependabot {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::UpdateConfig {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::PackageManager {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::UpdateSchedule {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AllowedUpdate {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AllowedUpdateMatch {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AllowedDependencyType {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AllowedUpdateType {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::IgnoredUpdate {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::IgnoredUpdateMatch {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AutomergedUpdate {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AutomergedUpdateMatch {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AutomergedDependencyType {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AutomergedUpdateType {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::VersionRequirementUpdate {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::CommitMessage {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
 impl FromStr for v2::Dependabot {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -64,7 +160,19 @@ impl FromStr for v2::CommitMessage {
         serde_yaml::from_str(s).map_err(Error::new)
     }
 }
+impl FromStr for v2::CommitMessageInclude {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
 impl FromStr for v2::Ignore {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v2::InsecureExternalCodeExecution {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         serde_yaml::from_str(s).map_err(Error::new)

@@ -1,7 +1,6 @@
 use std::{fmt, io};
 
-/// An error that occurred during during parsing the Dependabot configuration
-/// file.
+/// An error that occurred during parsing the Dependabot configuration.
 #[derive(Debug)]
 pub struct Error(ErrorKind);
 
@@ -47,7 +46,7 @@ impl From<Error> for io::Error {
 
 impl From<serde_yaml::Error> for ErrorKind {
     fn from(e: serde_yaml::Error) -> Self {
-        ErrorKind::Yaml(e)
+        Self::Yaml(e)
     }
 }
 

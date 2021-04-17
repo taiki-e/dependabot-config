@@ -4,6 +4,8 @@
 //!
 //! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
+use std::fmt;
+
 use indexmap::IndexMap;
 use serde::{de, Deserialize, Serialize};
 
@@ -95,12 +97,8 @@ pub struct Update {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ignore: Option<Vec<Ignore>>,
     /// Allow or deny code execution in manifest files.
-    ///
-    /// See [GitHub Docs][docs] for more.
-    ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#insecure-external-code-execution
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub insecure_external_code_execution: Option<String>,
+    pub insecure_external_code_execution: Option<InsecureExternalCodeExecution>,
     /// Labels to set on pull requests.
     ///
     /// See [GitHub Docs][docs] for more.
@@ -243,6 +241,7 @@ pub struct Schedule {
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduletime
+    // TODO: Should we wrap this in its own type and verify the content?
     #[serde(skip_serializing_if = "Option::is_none")]
     pub time: Option<String>,
     /// Specify an alternative time zone.
@@ -250,6 +249,7 @@ pub struct Schedule {
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduletimezone
+    // TODO: Should we wrap this in its own type and verify the content?
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timezone: Option<String>,
 }
@@ -364,7 +364,16 @@ pub struct CommitMessage {
     pub prefix_development: Option<String>,
     /// Specify that any prefix is followed by a list of the dependencies updated in the commit.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub include: Option<String>,
+    pub include: Option<CommitMessageInclude>,
+}
+
+/// Specify that any prefix is followed by a list of the dependencies updated in the commit.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+#[non_exhaustive]
+pub enum CommitMessageInclude {
+    /// Specify that any prefix is followed by a list of the dependencies updated in the commit.
+    Scope,
 }
 
 /// Ignore certain dependencies or versions.
@@ -388,6 +397,21 @@ impl Ignore {
     pub fn new(dependency_name: String) -> Self {
         Self { dependency_name, versions: None }
     }
+}
+
+/// Allow or deny code execution in manifest files.
+///
+/// See [GitHub Docs][docs] for more.
+///
+/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#insecure-external-code-execution
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+#[non_exhaustive]
+pub enum InsecureExternalCodeExecution {
+    /// Allow external code execution.
+    Allow,
+    /// Explicitly deny external code execution, irrespective of whether there is a registries setting for this update configuration.
+    Deny,
 }
 
 /// Change separator for pull request branch names.
@@ -414,6 +438,12 @@ pub struct PullRequestBranchName {
 #[allow(missing_copy_implementations)]
 pub struct Separator {
     repr: char,
+}
+
+impl fmt::Display for Separator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt::Display::fmt(&self.repr, f)
+    }
 }
 
 impl<'de> Deserialize<'de> for Separator {

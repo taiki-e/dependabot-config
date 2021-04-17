@@ -10,6 +10,16 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- [Support Dependabot v1 configuration file.](https://github.com/taiki-e/dependabot-config/pull/3)
+
+- [Add `v2::CommitMessageInclude` and `v2::InsecureExternalCodeExecution`.](https://github.com/taiki-e/dependabot-config/pull/3)
+
+- [Change `v2::CommitMessage::include` field from `Option<String>` to `Option<v2::CommitMessageInclude>`.](https://github.com/taiki-e/dependabot-config/pull/3)
+
+- [Change `v2::Update::insecure_external_code_execution` field from `Option<String>` to `Option<v2::InsecureExternalCodeExecution>`.](https://github.com/taiki-e/dependabot-config/pull/3)
+
+- [Implement `Display` for `v2::{PackageEcosystem, Interval, Day, DependencyType, RebaseStrategy, VersioningStrategy, RegistryType, Separator}`.](https://github.com/taiki-e/dependabot-config/pull/3)
+
 ## [0.1.0] - 2021-04-09
 
 Initial release
