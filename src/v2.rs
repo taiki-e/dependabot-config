@@ -4,6 +4,8 @@
 //!
 //! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
+use std::fmt;
+
 use indexmap::IndexMap;
 use serde::{de, Deserialize, Serialize};
 
@@ -239,6 +241,7 @@ pub struct Schedule {
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduletime
+    // TODO: Should we wrap this in its own type and verify the content?
     #[serde(skip_serializing_if = "Option::is_none")]
     pub time: Option<String>,
     /// Specify an alternative time zone.
@@ -246,6 +249,7 @@ pub struct Schedule {
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduletimezone
+    // TODO: Should we wrap this in its own type and verify the content?
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timezone: Option<String>,
 }
@@ -434,6 +438,12 @@ pub struct PullRequestBranchName {
 #[allow(missing_copy_implementations)]
 pub struct Separator {
     repr: char,
+}
+
+impl fmt::Display for Separator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt::Display::fmt(&self.repr, f)
+    }
 }
 
 impl<'de> Deserialize<'de> for Separator {

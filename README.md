@@ -29,7 +29,7 @@ use dependabot_config::v2::Dependabot;
 let s = fs::read_to_string(".github/dependabot.yml")?;
 let dependabot: Dependabot = s.parse()?;
 for update in dependabot.updates {
-    println!("{:?}", update.package_ecosystem);
+    println!("{}", update.package_ecosystem);
 }
 ```
 

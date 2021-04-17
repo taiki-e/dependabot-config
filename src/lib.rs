@@ -11,7 +11,7 @@
 //! let s = fs::read_to_string(".github/dependabot.yml")?;
 //! let dependabot: Dependabot = s.parse()?;
 //! for update in dependabot.updates {
-//!     println!("{:?}", update.package_ecosystem);
+//!     println!("{}", update.package_ecosystem);
 //! }
 //! # Ok(())
 //! # }
@@ -41,6 +41,8 @@
 #[cfg(test)]
 #[path = "gen/assert_impl.rs"]
 mod assert_impl;
+#[path = "gen/display.rs"]
+mod display;
 #[path = "gen/from_str.rs"]
 mod from_str;
 
