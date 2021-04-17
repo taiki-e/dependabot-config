@@ -92,7 +92,7 @@ fn serde_attr(attrs: &[syn::Attribute], name: &str) -> Option<String> {
         .filter_map(|attr| attr.parse_meta().ok())
     {
         if let syn::Meta::List(list) = meta {
-            for repr in list.nested.into_iter() {
+            for repr in list.nested {
                 if let syn::NestedMeta::Meta(syn::Meta::NameValue(nv)) = repr {
                     if nv.path.is_ident(name) {
                         if let syn::Lit::Str(s) = nv.lit {
