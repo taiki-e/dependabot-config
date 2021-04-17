@@ -35,14 +35,42 @@ impl fmt::Display for v1::UpdateSchedule {
         }
     }
 }
-impl fmt::Display for v1::DependencyType {
+impl fmt::Display for v1::AllowedDependencyType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Self::Development => f.write_str("development"),
+            Self::Production => f.write_str("production"),
             Self::Direct => f.write_str("direct"),
             Self::Indirect => f.write_str("indirect"),
             Self::All => f.write_str("all"),
-            Self::Production => f.write_str("production"),
+        }
+    }
+}
+impl fmt::Display for v1::AllowedUpdateType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Security => f.write_str("security"),
+            Self::All => f.write_str("all"),
+        }
+    }
+}
+impl fmt::Display for v1::AutomergedDependencyType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
             Self::Development => f.write_str("development"),
+            Self::Production => f.write_str("production"),
+            Self::All => f.write_str("all"),
+        }
+    }
+}
+impl fmt::Display for v1::AutomergedUpdateType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::SecurityPatch => f.write_str("security:patch"),
+            Self::SemverPatch => f.write_str("semver:patch"),
+            Self::SemverMinor => f.write_str("semver:minor"),
+            Self::InRange => f.write_str("in_range"),
+            Self::All => f.write_str("all"),
         }
     }
 }

@@ -221,27 +221,6 @@ pub enum UpdateSchedule {
     Monthly,
 }
 
-/// Allow updates for dependencies of specific types.
-///
-/// See [Dependabot Docs][docs] for more.
-///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#allow
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
-#[serde(rename_all = "snake_case")]
-#[non_exhaustive]
-pub enum DependencyType {
-    /// All explicitly defined dependencies.
-    Direct,
-    /// Dependencies of direct dependencies (also known as sub-dependencies, or transient dependencies).
-    Indirect,
-    /// All explicitly defined dependencies. For bundler, pip, composer, cargo, also the dependencies of direct dependencies.
-    All,
-    /// Only dependencies in the "Product dependency group".
-    Production,
-    /// Only dependencies in the "Development dependency group".
-    Development,
-}
-
 /// Customize which updates are allowed.
 ///
 /// See [Dependabot Docs][docs] for more.
@@ -256,6 +235,10 @@ pub struct AllowedUpdate {
 }
 
 /// Customize which updates are allowed.
+///
+/// See [Dependabot Docs][docs] for more.
+///
+/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -265,8 +248,41 @@ pub struct AllowedUpdateMatch {
     pub dependency_name: Option<String>,
     /// Allow updates for dependencies of specific types.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub dependency_type: Option<DependencyType>,
-    pub update_type: Option<String>,
+    pub dependency_type: Option<AllowedDependencyType>,
+    pub update_type: Option<AllowedUpdateType>,
+}
+
+/// Allow updates for dependencies of specific types.
+///
+/// See [Dependabot Docs][docs] for more.
+///
+/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
+#[non_exhaustive]
+pub enum AllowedDependencyType {
+    /// Development dependency group (supported by some package managers).
+    Development,
+    /// Production dependency group (supported by some package managers).
+    Production,
+    /// Direct/top-level dependencies.
+    Direct,
+    /// Indirect/transient/sub-dependencies.
+    Indirect,
+    All,
+}
+
+/// Allowed update type.
+///
+/// See [Dependabot Docs][docs] for more.
+///
+/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
+#[non_exhaustive]
+pub enum AllowedUpdateType {
+    Security,
+    All,
 }
 
 /// Ignore certain dependencies or versions.
@@ -327,9 +343,46 @@ pub struct AutomergedUpdate {
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
 pub struct AutomergedUpdateMatch {
-    pub dependency_type: Option<DependencyType>,
     pub dependency_name: Option<String>,
-    pub update_type: Option<String>,
+    pub dependency_type: Option<AutomergedDependencyType>,
+    pub update_type: Option<AutomergedUpdateType>,
+}
+
+/// Dependency types that should be merged automatically.
+///
+/// See [Dependabot Docs][docs] for more.
+///
+/// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
+#[non_exhaustive]
+pub enum AutomergedDependencyType {
+    Development,
+    Production,
+    All,
+}
+
+/// Update types that should be merged automatically.
+///
+/// See [Dependabot Docs][docs] for more.
+///
+/// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
+#[non_exhaustive]
+pub enum AutomergedUpdateType {
+    /// SemVer patch update that fixes a known security vulnerability.
+    #[serde(rename = "security:patch")]
+    SecurityPatch,
+    /// SemVer patch update, e.g. > 1.x && 1.0.1 to 1.0.3.
+    #[serde(rename = "semver:patch")]
+    SemverPatch,
+    /// SemVer minor update, e.g. > 1.x && 2.1.4 to 2.3.1.
+    #[serde(rename = "semver:minor")]
+    SemverMinor,
+    /// Matching the version requirement in your package manifest.
+    InRange,
+    All,
 }
 
 /// How to update manifest version requirements.

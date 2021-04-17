@@ -34,12 +34,6 @@ impl FromStr for v1::UpdateSchedule {
         serde_yaml::from_str(s).map_err(Error::new)
     }
 }
-impl FromStr for v1::DependencyType {
-    type Err = Error;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        serde_yaml::from_str(s).map_err(Error::new)
-    }
-}
 impl FromStr for v1::AllowedUpdate {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -47,6 +41,18 @@ impl FromStr for v1::AllowedUpdate {
     }
 }
 impl FromStr for v1::AllowedUpdateMatch {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AllowedDependencyType {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AllowedUpdateType {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         serde_yaml::from_str(s).map_err(Error::new)
@@ -71,6 +77,18 @@ impl FromStr for v1::AutomergedUpdate {
     }
 }
 impl FromStr for v1::AutomergedUpdateMatch {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AutomergedDependencyType {
+    type Err = Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        serde_yaml::from_str(s).map_err(Error::new)
+    }
+}
+impl FromStr for v1::AutomergedUpdateType {
     type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         serde_yaml::from_str(s).map_err(Error::new)
