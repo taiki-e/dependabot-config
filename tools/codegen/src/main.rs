@@ -31,7 +31,9 @@ fn header() -> String {
         env!("CARGO_BIN_NAME"),
         ".\n",
         "// It is not intended for manual editing.\n",
-        "\n"
+        "\n",
+        "#![allow(clippy::wildcard_imports)]\n",
+        "\n",
     )
     .into()
 }
