@@ -5,7 +5,6 @@ authors = ["Taiki Endo <te316e89@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/taiki-e/dependabot-config"
-documentation = "https://docs.rs/dependabot-config"
 keywords = ["dependabot", "serde", "serialization"]
 categories = ["parser-implementations"]
 exclude = ["/.*", "/tools"]
