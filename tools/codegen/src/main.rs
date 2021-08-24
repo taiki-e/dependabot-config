@@ -3,18 +3,21 @@
 use std::{
     collections::BTreeSet,
     path::{Path, PathBuf},
+    process::Command,
 };
 
-use anyhow::Result;
+use anyhow::{bail, Result};
+use fs_err as fs;
 use heck::{KebabCase, SnakeCase};
+use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::visit_mut::{self, VisitMut};
 use walkdir::WalkDir;
 
 fn main() -> Result<()> {
-    gen_from_str()?;
-    gen_display()?;
     gen_assert_impl()?;
+    gen_display()?;
+    gen_from_str()?;
     Ok(())
 }
 
@@ -38,10 +41,20 @@ fn header() -> String {
     .into()
 }
 
+fn write(path: &Path, content: &TokenStream) -> Result<()> {
+    fs::write(path, header() + &content.to_string())?;
+    let status = Command::new("rustfmt")
+        .arg(path)
+        .args(&["--config", "normalize_doc_attributes=true,format_macro_matchers=true"])
+        .status()?;
+    if !status.success() {
+        bail!("rustfmt didn't exit successfully");
+    }
+    Ok(())
+}
+
 fn gen_from_str() -> Result<()> {
     let root_dir = &root_dir();
-
-    let mut out = header();
 
     let mut tokens = quote! {
         use std::str::FromStr;
@@ -80,9 +93,7 @@ fn gen_from_str() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    out += &tokens.to_string();
-
-    fs::write(root_dir.join("src/gen/from_str.rs"), out)?;
+    write(&root_dir.join("src/gen/from_str.rs"), &tokens)?;
 
     Ok(())
 }
@@ -119,8 +130,6 @@ fn change_case(case: Option<&str>, value: String) -> String {
 
 fn gen_display() -> Result<()> {
     let root_dir = &root_dir();
-
-    let mut out = header();
 
     let mut tokens = quote! {
         use std::fmt;
@@ -170,9 +179,7 @@ fn gen_display() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    out += &tokens.to_string();
-
-    fs::write(root_dir.join("src/gen/display.rs"), out)?;
+    write(&root_dir.join("src/gen/display.rs"), &tokens)?;
 
     Ok(())
 }
@@ -180,8 +187,7 @@ fn gen_display() -> Result<()> {
 fn gen_assert_impl() -> Result<()> {
     let root_dir = &root_dir();
     let out_dir = &root_dir.join("src/gen");
-
-    let mut out = header();
+    fs::create_dir_all(out_dir)?;
 
     let files: BTreeSet<String> = WalkDir::new(root_dir.join("src"))
         .into_iter()
@@ -236,7 +242,7 @@ fn gen_assert_impl() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    out += &quote! {
+    let out = quote! {
         use crate::*;
         const _: fn() = || {
             fn assert_send<T: ?Sized + Send>() {}
@@ -244,11 +250,8 @@ fn gen_assert_impl() -> Result<()> {
             fn assert_unpin<T: ?Sized + Unpin>() {}
             #tokens
         };
-    }
-    .to_string();
-
-    fs::create_dir_all(out_dir)?;
-    fs::write(out_dir.join("assert_impl.rs"), out)?;
+    };
+    write(&out_dir.join("assert_impl.rs"), &out)?;
 
     Ok(())
 }

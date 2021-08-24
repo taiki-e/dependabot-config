@@ -6,8 +6,9 @@ publish = false
 
 [dependencies]
 anyhow = "1"
-fs = { package = "fs-err", version = "2" }
+fs-err = "2"
 heck = "0.3"
+proc-macro2 = "1"
 quote = "1"
 syn = { version = "1", features = ["full", "visit-mut"] }
 walkdir = "2"
