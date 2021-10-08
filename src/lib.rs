@@ -28,7 +28,6 @@
 ))]
 #![forbid(unsafe_code)]
 #![warn(
-    future_incompatible,
     missing_copy_implementations,
     missing_debug_implementations,
     missing_docs,
