@@ -8,7 +8,7 @@ use std::{
 
 use anyhow::{bail, Result};
 use fs_err as fs;
-use heck::{KebabCase, SnakeCase};
+use heck::{ToKebabCase, ToSnakeCase};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::visit_mut::{self, VisitMut};
