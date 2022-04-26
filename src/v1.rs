@@ -158,7 +158,7 @@ impl UpdateConfig {
 /// See [Dependabot Docs][docs] for more.
 ///
 /// [docs]: https://dependabot.com/docs/config-file/#package_manager-required
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
 pub enum PackageManager {
