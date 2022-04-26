@@ -10,6 +10,12 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.2.1] - 2022-04-26
+
+- Implement `Hash` for `v2::PackageEcosystem`. ([#8](https://github.com/taiki-e/dependabot-config/pull/8), thanks @andreimoustache)
+
+- Implement `Hash` for `v1::PackageManager`.
+
 ## [0.2.0] - 2021-04-17
 
 - [Support Dependabot v1 configuration file.](https://github.com/taiki-e/dependabot-config/pull/3)
@@ -26,6 +32,7 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 Initial release
 
-[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/taiki-e/dependabot-config/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/taiki-e/dependabot-config/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/taiki-e/dependabot-config/releases/tag/v0.1.0
