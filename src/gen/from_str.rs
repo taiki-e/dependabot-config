@@ -4,7 +4,6 @@
 #![allow(clippy::wildcard_imports)]
 
 use std::str::FromStr;
-
 use crate::*;
 impl FromStr for Dependabot {
     type Err = Error;

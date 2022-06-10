@@ -4,7 +4,6 @@
 #![allow(clippy::wildcard_imports)]
 
 use std::fmt;
-
 use crate::*;
 impl fmt::Display for v1::PackageManager {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -83,7 +82,9 @@ impl fmt::Display for v1::VersionRequirementUpdate {
             Self::Auto => f.write_str("auto"),
             Self::WidenRanges => f.write_str("widen_ranges"),
             Self::IncreaseVersions => f.write_str("increase_versions"),
-            Self::IncreaseVersionsIfNecessary => f.write_str("increase_versions_if_necessary"),
+            Self::IncreaseVersionsIfNecessary => {
+                f.write_str("increase_versions_if_necessary")
+            }
         }
     }
 }

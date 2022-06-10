@@ -38,10 +38,13 @@
 #![warn(clippy::default_trait_access, clippy::wildcard_imports)]
 
 #[cfg(test)]
+#[rustfmt::skip]
 #[path = "gen/assert_impl.rs"]
 mod assert_impl;
+#[rustfmt::skip]
 #[path = "gen/display.rs"]
 mod display;
+#[rustfmt::skip]
 #[path = "gen/from_str.rs"]
 mod from_str;
 
