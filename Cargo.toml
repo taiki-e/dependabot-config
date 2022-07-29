@@ -2,7 +2,7 @@
 name = "dependabot-config"
 version = "0.2.1" #publish:version
 edition = "2021"
-rust-version = "1.56"
+rust-version = "1.58"
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/taiki-e/dependabot-config"
 keywords = ["dependabot", "serde", "serialization"]
@@ -23,4 +23,4 @@ members = ["tools/codegen"]
 [dependencies]
 indexmap = { version = "1.5.2", features = ["std", "serde-1"] }
 serde = { version = "1.0.103", features = ["derive"] }
-serde_yaml = "0.8.16"
+serde_yaml = "0.9"
