@@ -10,6 +10,10 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Update `serde_yaml` to 0.9.
+
+  **Note:** This raises the minimum supported Rust version of this crate from Rust 1.56 to Rust 1.58.
+
 ## [0.2.1] - 2022-04-26
 
 - Implement `Hash` for `v2::PackageEcosystem`. ([#8](https://github.com/taiki-e/dependabot-config/pull/8), thanks @andreimoustache)
