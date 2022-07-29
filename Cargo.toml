@@ -23,4 +23,4 @@ members = ["tools/codegen"]
 [dependencies]
 indexmap = { version = "1.5.2", features = ["std", "serde-1"] }
 serde = { version = "1.0.103", features = ["derive"] }
-serde_yaml = "0.8.16"
+serde_yaml = "0.9.0"
