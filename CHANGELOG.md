@@ -10,6 +10,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.2.2] - 2022-07-29
+
 - Update `serde_yaml` to 0.9.
 
   **Note:** This raises the minimum supported Rust version of this crate from Rust 1.56 to Rust 1.58.
@@ -36,7 +38,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 Initial release
 
-[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/taiki-e/dependabot-config/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/taiki-e/dependabot-config/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/taiki-e/dependabot-config/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/taiki-e/dependabot-config/releases/tag/v0.1.0
