@@ -35,7 +35,7 @@
     single_use_lifetimes,
     unreachable_pub
 )]
-#![warn(clippy::pedantic)]
+#![warn(clippy::exhaustive_enums, clippy::exhaustive_structs, clippy::pedantic)]
 #![allow(clippy::must_use_candidate)]
 
 #[cfg(test)]
