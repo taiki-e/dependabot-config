@@ -3,7 +3,7 @@
 
 #![allow(clippy::wildcard_imports)]
 
-use std::fmt;
+use core::fmt;
 use crate::*;
 impl fmt::Display for v1::PackageManager {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

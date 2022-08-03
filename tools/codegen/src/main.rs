@@ -54,7 +54,7 @@ fn gen_from_str() -> Result<()> {
     let workspace_root = &workspace_root();
 
     let mut tokens = quote! {
-        use std::str::FromStr;
+        use core::str::FromStr;
         use crate::*;
     };
 
@@ -129,7 +129,7 @@ fn gen_display() -> Result<()> {
     let workspace_root = &workspace_root();
 
     let mut tokens = quote! {
-        use std::fmt;
+        use core::fmt;
         use crate::*;
     };
 

@@ -4,7 +4,7 @@
 //!
 //! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
-use std::fmt;
+use core::fmt;
 
 use indexmap::IndexMap;
 use serde::{de, Deserialize, Serialize};

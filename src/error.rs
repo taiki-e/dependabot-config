@@ -1,4 +1,5 @@
-use std::{fmt, io};
+use core::fmt;
+use std::io;
 
 /// An error that occurred during parsing the Dependabot configuration.
 #[derive(Debug)]
