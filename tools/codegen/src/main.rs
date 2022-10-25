@@ -124,7 +124,7 @@ fn change_case(case: Option<&str>, value: String) -> String {
         None => value,
         Some("kebab-case") => value.to_kebab_case(),
         Some("snake_case") => value.to_snake_case(),
-        Some(case) => panic!("unknown case: {}", case),
+        Some(case) => panic!("unknown case: {case}"),
     }
 }
 
