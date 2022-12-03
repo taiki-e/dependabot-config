@@ -55,8 +55,7 @@ where
     match n {
         2 => Ok(n),
         _ => Err(de::Error::custom(format!(
-            "The property 'version' value \"{}\" did not match: 2",
-            n
+            "The property 'version' value \"{n}\" did not match: 2",
         ))),
     }
 }
@@ -455,9 +454,8 @@ impl<'de> Deserialize<'de> for Separator {
         match c {
             '-' | '/' | '_' => Ok(Self { repr: c }),
             _ => Err(de::Error::custom(format!(
-                "The property 'pull-request-branch-name/separator' value \"{}\" \
+                "The property 'pull-request-branch-name/separator' value \"{c}\" \
                      did not match one of the following values: -, /, _",
-                c
             ))),
         }
     }

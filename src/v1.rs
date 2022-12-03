@@ -51,8 +51,7 @@ where
     match n {
         1 => Ok(n),
         _ => Err(de::Error::custom(format!(
-            "The property 'version' value \"{}\" did not match: 1",
-            n
+            "The property 'version' value \"{n}\" did not match: 1",
         ))),
     }
 }
