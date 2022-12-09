@@ -1,0 +1,6 @@
+automerged
+gitsubmodule
+gomod
+lockfiles
+rubygems
+unparse
