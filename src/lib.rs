@@ -1,23 +1,25 @@
-//! Structured access to the Dependabot configuration.
-//!
-//! ## Examples
-//!
-//! ```rust
-//! # fn dox() -> std::io::Result<()> {
-//! use std::fs;
-//!
-//! use dependabot_config::v2::Dependabot;
-//!
-//! let s = fs::read_to_string(".github/dependabot.yml")?;
-//! let dependabot: Dependabot = s.parse()?;
-//! for update in dependabot.updates {
-//!     println!("{}", update.package_ecosystem);
-//! }
-//! # Ok(())
-//! # }
-//! ```
-//!
-//! [dependabot]: https://docs.github.com/en/code-security/supply-chain-security/about-dependabot-version-updates
+/*!
+Structured access to the Dependabot configuration.
+
+## Examples
+
+```rust
+# fn dox() -> std::io::Result<()> {
+use std::fs;
+
+use dependabot_config::v2::Dependabot;
+
+let s = fs::read_to_string(".github/dependabot.yml")?;
+let dependabot: Dependabot = s.parse()?;
+for update in dependabot.updates {
+    println!("{}", update.package_ecosystem);
+}
+# Ok(())
+# }
+```
+
+[dependabot]: https://docs.github.com/en/code-security/supply-chain-security/about-dependabot-version-updates
+*/
 
 #![doc(test(
     no_crate_inject,
