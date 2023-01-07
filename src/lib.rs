@@ -1,5 +1,5 @@
 /*!
-Structured access to the Dependabot configuration.
+Structured access to the [Dependabot] configuration file.
 
 ## Examples
 
