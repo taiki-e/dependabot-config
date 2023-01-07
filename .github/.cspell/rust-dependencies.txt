@@ -3,11 +3,11 @@
 
 anyhow
 heck
+ignore
 indexmap
 macro
 prettyplease
 proc
 quote
 serde
-walkdir
 yaml
