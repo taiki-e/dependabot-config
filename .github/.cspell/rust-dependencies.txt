@@ -2,6 +2,7 @@
 // It is not intended for manual editing.
 
 anyhow
+assertions
 heck
 ignore
 indexmap
@@ -10,4 +11,5 @@ prettyplease
 proc
 quote
 serde
+static
 yaml

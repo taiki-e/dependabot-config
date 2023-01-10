@@ -4,43 +4,245 @@
 
 #![cfg_attr(rustfmt, rustfmt::skip)]
 
+#![allow(clippy::std_instead_of_alloc, clippy::std_instead_of_core)]
+#[allow(unused_imports)]
+use core::marker::PhantomPinned;
+/// `Send` & `!Sync`
+#[allow(dead_code)]
+struct NotSync(core::cell::Cell<()>);
+/// `!Send` & `!Sync`
+#[allow(dead_code)]
+struct NotSendSync(std::rc::Rc<()>);
+/// `!UnwindSafe`
+#[allow(dead_code)]
+struct NotUnwindSafe(&'static mut ());
+/// `!RefUnwindSafe`
+#[allow(dead_code)]
+struct NotRefUnwindSafe(core::cell::UnsafeCell<()>);
+#[allow(dead_code)]
+fn assert_send<T: ?Sized + Send>() {}
+#[allow(dead_code)]
+fn assert_sync<T: ?Sized + Sync>() {}
+#[allow(dead_code)]
+fn assert_unpin<T: ?Sized + Unpin>() {}
+#[allow(dead_code)]
+fn assert_unwind_safe<T: ?Sized + std::panic::UnwindSafe>() {}
+#[allow(dead_code)]
+fn assert_ref_unwind_safe<T: ?Sized + std::panic::RefUnwindSafe>() {}
+#[allow(unused_macros)]
+macro_rules! assert_not_send {
+    ($ty:ty) => {
+        static_assertions::assert_not_impl_all!($ty : Send);
+    };
+}
+#[allow(unused_macros)]
+macro_rules! assert_not_sync {
+    ($ty:ty) => {
+        static_assertions::assert_not_impl_all!($ty : Sync);
+    };
+}
+#[allow(unused_macros)]
+macro_rules! assert_not_unpin {
+    ($ty:ty) => {
+        static_assertions::assert_not_impl_all!($ty : Unpin);
+    };
+}
+#[allow(unused_macros)]
+macro_rules! assert_not_unwind_safe {
+    ($ty:ty) => {
+        static_assertions::assert_not_impl_all!($ty : std::panic::UnwindSafe);
+    };
+}
+#[allow(unused_macros)]
+macro_rules! assert_not_ref_unwind_safe {
+    ($ty:ty) => {
+        static_assertions::assert_not_impl_all!($ty : std::panic::RefUnwindSafe);
+    };
+}
 const _: fn() = || {
-    fn assert_auto_traits<T: ?Sized + Send + Sync + Unpin>() {}
-    assert_auto_traits::<crate::error::Error>();
-    assert_auto_traits::<crate::Dependabot>();
-    assert_auto_traits::<crate::v1::Dependabot>();
-    assert_auto_traits::<crate::v1::UpdateConfig>();
-    assert_auto_traits::<crate::v1::PackageManager>();
-    assert_auto_traits::<crate::v1::UpdateSchedule>();
-    assert_auto_traits::<crate::v1::AllowedUpdate>();
-    assert_auto_traits::<crate::v1::AllowedUpdateMatch>();
-    assert_auto_traits::<crate::v1::AllowedDependencyType>();
-    assert_auto_traits::<crate::v1::AllowedUpdateType>();
-    assert_auto_traits::<crate::v1::IgnoredUpdate>();
-    assert_auto_traits::<crate::v1::IgnoredUpdateMatch>();
-    assert_auto_traits::<crate::v1::AutomergedUpdate>();
-    assert_auto_traits::<crate::v1::AutomergedUpdateMatch>();
-    assert_auto_traits::<crate::v1::AutomergedDependencyType>();
-    assert_auto_traits::<crate::v1::AutomergedUpdateType>();
-    assert_auto_traits::<crate::v1::VersionRequirementUpdate>();
-    assert_auto_traits::<crate::v1::CommitMessage>();
-    assert_auto_traits::<crate::v2::Dependabot>();
-    assert_auto_traits::<crate::v2::Update>();
-    assert_auto_traits::<crate::v2::PackageEcosystem>();
-    assert_auto_traits::<crate::v2::Schedule>();
-    assert_auto_traits::<crate::v2::Interval>();
-    assert_auto_traits::<crate::v2::Day>();
-    assert_auto_traits::<crate::v2::Allow>();
-    assert_auto_traits::<crate::v2::DependencyType>();
-    assert_auto_traits::<crate::v2::CommitMessage>();
-    assert_auto_traits::<crate::v2::CommitMessageInclude>();
-    assert_auto_traits::<crate::v2::Ignore>();
-    assert_auto_traits::<crate::v2::InsecureExternalCodeExecution>();
-    assert_auto_traits::<crate::v2::PullRequestBranchName>();
-    assert_auto_traits::<crate::v2::Separator>();
-    assert_auto_traits::<crate::v2::RebaseStrategy>();
-    assert_auto_traits::<crate::v2::VersioningStrategy>();
-    assert_auto_traits::<crate::v2::Registries>();
-    assert_auto_traits::<crate::v2::Registry>();
-    assert_auto_traits::<crate::v2::RegistryType>();
+    assert_send::<crate::error::Error>();
+    assert_sync::<crate::error::Error>();
+    assert_unpin::<crate::error::Error>();
+    assert_not_unwind_safe!(crate::error::Error);
+    assert_not_ref_unwind_safe!(crate::error::Error);
+    assert_send::<crate::Dependabot>();
+    assert_sync::<crate::Dependabot>();
+    assert_unpin::<crate::Dependabot>();
+    assert_unwind_safe::<crate::Dependabot>();
+    assert_ref_unwind_safe::<crate::Dependabot>();
+    assert_send::<crate::v1::Dependabot>();
+    assert_sync::<crate::v1::Dependabot>();
+    assert_unpin::<crate::v1::Dependabot>();
+    assert_unwind_safe::<crate::v1::Dependabot>();
+    assert_ref_unwind_safe::<crate::v1::Dependabot>();
+    assert_send::<crate::v1::UpdateConfig>();
+    assert_sync::<crate::v1::UpdateConfig>();
+    assert_unpin::<crate::v1::UpdateConfig>();
+    assert_unwind_safe::<crate::v1::UpdateConfig>();
+    assert_ref_unwind_safe::<crate::v1::UpdateConfig>();
+    assert_send::<crate::v1::PackageManager>();
+    assert_sync::<crate::v1::PackageManager>();
+    assert_unpin::<crate::v1::PackageManager>();
+    assert_unwind_safe::<crate::v1::PackageManager>();
+    assert_ref_unwind_safe::<crate::v1::PackageManager>();
+    assert_send::<crate::v1::UpdateSchedule>();
+    assert_sync::<crate::v1::UpdateSchedule>();
+    assert_unpin::<crate::v1::UpdateSchedule>();
+    assert_unwind_safe::<crate::v1::UpdateSchedule>();
+    assert_ref_unwind_safe::<crate::v1::UpdateSchedule>();
+    assert_send::<crate::v1::AllowedUpdate>();
+    assert_sync::<crate::v1::AllowedUpdate>();
+    assert_unpin::<crate::v1::AllowedUpdate>();
+    assert_unwind_safe::<crate::v1::AllowedUpdate>();
+    assert_ref_unwind_safe::<crate::v1::AllowedUpdate>();
+    assert_send::<crate::v1::AllowedUpdateMatch>();
+    assert_sync::<crate::v1::AllowedUpdateMatch>();
+    assert_unpin::<crate::v1::AllowedUpdateMatch>();
+    assert_unwind_safe::<crate::v1::AllowedUpdateMatch>();
+    assert_ref_unwind_safe::<crate::v1::AllowedUpdateMatch>();
+    assert_send::<crate::v1::AllowedDependencyType>();
+    assert_sync::<crate::v1::AllowedDependencyType>();
+    assert_unpin::<crate::v1::AllowedDependencyType>();
+    assert_unwind_safe::<crate::v1::AllowedDependencyType>();
+    assert_ref_unwind_safe::<crate::v1::AllowedDependencyType>();
+    assert_send::<crate::v1::AllowedUpdateType>();
+    assert_sync::<crate::v1::AllowedUpdateType>();
+    assert_unpin::<crate::v1::AllowedUpdateType>();
+    assert_unwind_safe::<crate::v1::AllowedUpdateType>();
+    assert_ref_unwind_safe::<crate::v1::AllowedUpdateType>();
+    assert_send::<crate::v1::IgnoredUpdate>();
+    assert_sync::<crate::v1::IgnoredUpdate>();
+    assert_unpin::<crate::v1::IgnoredUpdate>();
+    assert_unwind_safe::<crate::v1::IgnoredUpdate>();
+    assert_ref_unwind_safe::<crate::v1::IgnoredUpdate>();
+    assert_send::<crate::v1::IgnoredUpdateMatch>();
+    assert_sync::<crate::v1::IgnoredUpdateMatch>();
+    assert_unpin::<crate::v1::IgnoredUpdateMatch>();
+    assert_unwind_safe::<crate::v1::IgnoredUpdateMatch>();
+    assert_ref_unwind_safe::<crate::v1::IgnoredUpdateMatch>();
+    assert_send::<crate::v1::AutomergedUpdate>();
+    assert_sync::<crate::v1::AutomergedUpdate>();
+    assert_unpin::<crate::v1::AutomergedUpdate>();
+    assert_unwind_safe::<crate::v1::AutomergedUpdate>();
+    assert_ref_unwind_safe::<crate::v1::AutomergedUpdate>();
+    assert_send::<crate::v1::AutomergedUpdateMatch>();
+    assert_sync::<crate::v1::AutomergedUpdateMatch>();
+    assert_unpin::<crate::v1::AutomergedUpdateMatch>();
+    assert_unwind_safe::<crate::v1::AutomergedUpdateMatch>();
+    assert_ref_unwind_safe::<crate::v1::AutomergedUpdateMatch>();
+    assert_send::<crate::v1::AutomergedDependencyType>();
+    assert_sync::<crate::v1::AutomergedDependencyType>();
+    assert_unpin::<crate::v1::AutomergedDependencyType>();
+    assert_unwind_safe::<crate::v1::AutomergedDependencyType>();
+    assert_ref_unwind_safe::<crate::v1::AutomergedDependencyType>();
+    assert_send::<crate::v1::AutomergedUpdateType>();
+    assert_sync::<crate::v1::AutomergedUpdateType>();
+    assert_unpin::<crate::v1::AutomergedUpdateType>();
+    assert_unwind_safe::<crate::v1::AutomergedUpdateType>();
+    assert_ref_unwind_safe::<crate::v1::AutomergedUpdateType>();
+    assert_send::<crate::v1::VersionRequirementUpdate>();
+    assert_sync::<crate::v1::VersionRequirementUpdate>();
+    assert_unpin::<crate::v1::VersionRequirementUpdate>();
+    assert_unwind_safe::<crate::v1::VersionRequirementUpdate>();
+    assert_ref_unwind_safe::<crate::v1::VersionRequirementUpdate>();
+    assert_send::<crate::v1::CommitMessage>();
+    assert_sync::<crate::v1::CommitMessage>();
+    assert_unpin::<crate::v1::CommitMessage>();
+    assert_unwind_safe::<crate::v1::CommitMessage>();
+    assert_ref_unwind_safe::<crate::v1::CommitMessage>();
+    assert_send::<crate::v2::Dependabot>();
+    assert_sync::<crate::v2::Dependabot>();
+    assert_unpin::<crate::v2::Dependabot>();
+    assert_unwind_safe::<crate::v2::Dependabot>();
+    assert_ref_unwind_safe::<crate::v2::Dependabot>();
+    assert_send::<crate::v2::Update>();
+    assert_sync::<crate::v2::Update>();
+    assert_unpin::<crate::v2::Update>();
+    assert_unwind_safe::<crate::v2::Update>();
+    assert_ref_unwind_safe::<crate::v2::Update>();
+    assert_send::<crate::v2::PackageEcosystem>();
+    assert_sync::<crate::v2::PackageEcosystem>();
+    assert_unpin::<crate::v2::PackageEcosystem>();
+    assert_unwind_safe::<crate::v2::PackageEcosystem>();
+    assert_ref_unwind_safe::<crate::v2::PackageEcosystem>();
+    assert_send::<crate::v2::Schedule>();
+    assert_sync::<crate::v2::Schedule>();
+    assert_unpin::<crate::v2::Schedule>();
+    assert_unwind_safe::<crate::v2::Schedule>();
+    assert_ref_unwind_safe::<crate::v2::Schedule>();
+    assert_send::<crate::v2::Interval>();
+    assert_sync::<crate::v2::Interval>();
+    assert_unpin::<crate::v2::Interval>();
+    assert_unwind_safe::<crate::v2::Interval>();
+    assert_ref_unwind_safe::<crate::v2::Interval>();
+    assert_send::<crate::v2::Day>();
+    assert_sync::<crate::v2::Day>();
+    assert_unpin::<crate::v2::Day>();
+    assert_unwind_safe::<crate::v2::Day>();
+    assert_ref_unwind_safe::<crate::v2::Day>();
+    assert_send::<crate::v2::Allow>();
+    assert_sync::<crate::v2::Allow>();
+    assert_unpin::<crate::v2::Allow>();
+    assert_unwind_safe::<crate::v2::Allow>();
+    assert_ref_unwind_safe::<crate::v2::Allow>();
+    assert_send::<crate::v2::DependencyType>();
+    assert_sync::<crate::v2::DependencyType>();
+    assert_unpin::<crate::v2::DependencyType>();
+    assert_unwind_safe::<crate::v2::DependencyType>();
+    assert_ref_unwind_safe::<crate::v2::DependencyType>();
+    assert_send::<crate::v2::CommitMessage>();
+    assert_sync::<crate::v2::CommitMessage>();
+    assert_unpin::<crate::v2::CommitMessage>();
+    assert_unwind_safe::<crate::v2::CommitMessage>();
+    assert_ref_unwind_safe::<crate::v2::CommitMessage>();
+    assert_send::<crate::v2::CommitMessageInclude>();
+    assert_sync::<crate::v2::CommitMessageInclude>();
+    assert_unpin::<crate::v2::CommitMessageInclude>();
+    assert_unwind_safe::<crate::v2::CommitMessageInclude>();
+    assert_ref_unwind_safe::<crate::v2::CommitMessageInclude>();
+    assert_send::<crate::v2::Ignore>();
+    assert_sync::<crate::v2::Ignore>();
+    assert_unpin::<crate::v2::Ignore>();
+    assert_unwind_safe::<crate::v2::Ignore>();
+    assert_ref_unwind_safe::<crate::v2::Ignore>();
+    assert_send::<crate::v2::InsecureExternalCodeExecution>();
+    assert_sync::<crate::v2::InsecureExternalCodeExecution>();
+    assert_unpin::<crate::v2::InsecureExternalCodeExecution>();
+    assert_unwind_safe::<crate::v2::InsecureExternalCodeExecution>();
+    assert_ref_unwind_safe::<crate::v2::InsecureExternalCodeExecution>();
+    assert_send::<crate::v2::PullRequestBranchName>();
+    assert_sync::<crate::v2::PullRequestBranchName>();
+    assert_unpin::<crate::v2::PullRequestBranchName>();
+    assert_unwind_safe::<crate::v2::PullRequestBranchName>();
+    assert_ref_unwind_safe::<crate::v2::PullRequestBranchName>();
+    assert_send::<crate::v2::Separator>();
+    assert_sync::<crate::v2::Separator>();
+    assert_unpin::<crate::v2::Separator>();
+    assert_unwind_safe::<crate::v2::Separator>();
+    assert_ref_unwind_safe::<crate::v2::Separator>();
+    assert_send::<crate::v2::RebaseStrategy>();
+    assert_sync::<crate::v2::RebaseStrategy>();
+    assert_unpin::<crate::v2::RebaseStrategy>();
+    assert_unwind_safe::<crate::v2::RebaseStrategy>();
+    assert_ref_unwind_safe::<crate::v2::RebaseStrategy>();
+    assert_send::<crate::v2::VersioningStrategy>();
+    assert_sync::<crate::v2::VersioningStrategy>();
+    assert_unpin::<crate::v2::VersioningStrategy>();
+    assert_unwind_safe::<crate::v2::VersioningStrategy>();
+    assert_ref_unwind_safe::<crate::v2::VersioningStrategy>();
+    assert_send::<crate::v2::Registries>();
+    assert_sync::<crate::v2::Registries>();
+    assert_unpin::<crate::v2::Registries>();
+    assert_unwind_safe::<crate::v2::Registries>();
+    assert_ref_unwind_safe::<crate::v2::Registries>();
+    assert_send::<crate::v2::Registry>();
+    assert_sync::<crate::v2::Registry>();
+    assert_unpin::<crate::v2::Registry>();
+    assert_unwind_safe::<crate::v2::Registry>();
+    assert_ref_unwind_safe::<crate::v2::Registry>();
+    assert_send::<crate::v2::RegistryType>();
+    assert_sync::<crate::v2::RegistryType>();
+    assert_unpin::<crate::v2::RegistryType>();
+    assert_unwind_safe::<crate::v2::RegistryType>();
+    assert_ref_unwind_safe::<crate::v2::RegistryType>();
 };
