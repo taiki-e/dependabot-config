@@ -61,7 +61,7 @@ fn gen_from_str() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    write(function_name!(), &workspace_root.join("src/gen/from_str.rs"), tokens)?;
+    write(function_name!(), workspace_root.join("src/gen/from_str.rs"), tokens)?;
 
     Ok(())
 }
@@ -146,7 +146,7 @@ fn gen_display() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    write(function_name!(), &workspace_root.join("src/gen/display.rs"), tokens)?;
+    write(function_name!(), workspace_root.join("src/gen/display.rs"), tokens)?;
 
     Ok(())
 }
@@ -458,7 +458,7 @@ fn gen_assert_impl() -> Result<()> {
             #tokens
         };
     });
-    write(function_name!(), &out_dir.join("assert_impl.rs"), out)?;
+    write(function_name!(), out_dir.join("assert_impl.rs"), out)?;
 
     Ok(())
 }
