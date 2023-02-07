@@ -3,7 +3,6 @@
 // It is not intended for manual editing.
 
 #![cfg_attr(rustfmt, rustfmt::skip)]
-
 use core::fmt;
 impl fmt::Display for crate::v1::PackageManager {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
