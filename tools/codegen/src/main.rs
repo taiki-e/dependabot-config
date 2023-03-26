@@ -10,7 +10,11 @@ use anyhow::Result;
 use fs_err as fs;
 use heck::{ToKebabCase, ToSnakeCase};
 use quote::{format_ident, quote};
-use syn::visit_mut::{self, VisitMut};
+use syn::{
+    punctuated::Punctuated,
+    visit_mut::{self, VisitMut},
+    *,
+};
 
 use crate::file::*;
 
@@ -69,17 +73,16 @@ fn gen_from_str() -> Result<()> {
 fn serde_attr(attrs: &[syn::Attribute], name: &str) -> Option<String> {
     for meta in attrs
         .iter()
-        .filter(|attr| attr.path.is_ident("serde"))
-        .filter_map(|attr| attr.parse_meta().ok())
+        .filter(|attr| attr.path().is_ident("serde"))
+        .filter_map(|attr| {
+            attr.parse_args_with(Punctuated::<Meta, Token![,]>::parse_terminated).ok()
+        })
+        .flatten()
     {
-        if let syn::Meta::List(list) = meta {
-            for repr in list.nested {
-                if let syn::NestedMeta::Meta(syn::Meta::NameValue(nv)) = repr {
-                    if nv.path.is_ident(name) {
-                        if let syn::Lit::Str(s) = nv.lit {
-                            return Some(s.value());
-                        }
-                    }
+        if let syn::Meta::NameValue(nv) = meta {
+            if nv.path.is_ident(name) {
+                if let Expr::Lit(ExprLit { lit: syn::Lit::Str(s), .. }) = nv.value {
+                    return Some(s.value());
                 }
             }
         }
