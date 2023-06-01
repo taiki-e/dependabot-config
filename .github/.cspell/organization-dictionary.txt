@@ -145,6 +145,7 @@ endianness
 esac
 euxo
 gsub
+moreutils
 msys
 noninteractive
 noprofile

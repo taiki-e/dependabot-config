@@ -4,6 +4,7 @@ use dependabot_config::{v1, v2, Dependabot};
 use serde::{Deserialize, Serialize};
 
 #[test]
+#[cfg_attr(miri, ignore)] // Miri is too slow
 fn test_v2() {
     let v2_test_data = include_str!("fixtures/v2.yml");
     assert_eq!(from_str::<serde_yaml::Value>(v2_test_data).len(), 22);
