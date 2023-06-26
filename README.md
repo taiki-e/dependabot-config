@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-dependabot-config = "0.2"
+dependabot-config = "0.3"
 ```
 
 *Compiler support: requires rustc 1.64+*
