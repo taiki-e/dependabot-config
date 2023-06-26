@@ -2,7 +2,7 @@
 name = "dependabot-config"
 version = "0.2.2"
 edition = "2021"
-rust-version = "1.58"
+rust-version = "1.64"
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/taiki-e/dependabot-config"
 keywords = ["dependabot", "serde", "serialization"]
@@ -24,7 +24,7 @@ doc-scrape-examples = false
 
 # Note: indexmap and serde are public dependencies.
 [dependencies]
-indexmap = { version = "1.5.2", features = ["std", "serde-1"] }
+indexmap = { version = "2", features = ["serde"] }
 serde = { version = "1.0.103", features = ["derive"] }
 serde_yaml = "0.9"
 
