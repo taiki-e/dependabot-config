@@ -10,6 +10,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.3.2] - 2023-08-12
+
 This release updates v2 types based on the latest docs.
 
 - Add `v2::Dependabot::enable_beta_ecosystems` field.
@@ -62,7 +64,8 @@ This release updates v2 types based on the latest docs.
 
 Initial release
 
-[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/taiki-e/dependabot-config/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/taiki-e/dependabot-config/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/taiki-e/dependabot-config/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/taiki-e/dependabot-config/compare/v0.2.1...v0.2.2
