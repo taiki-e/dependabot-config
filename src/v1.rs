@@ -6,6 +6,8 @@
 
 #![allow(missing_docs)]
 
+// TODO: change usize fields to u32?
+
 use serde::{de, Deserialize, Serialize};
 
 /// The Dependabot v1 configuration.
@@ -15,6 +17,7 @@ use serde::{de, Deserialize, Serialize};
 /// [docs]: https://dependabot.com/docs/config-file
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Dependabot {
     #[serde(deserialize_with = "de_version")]
@@ -63,6 +66,7 @@ where
 /// [docs]: https://dependabot.com/docs/config-file/#available-configuration-options
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct UpdateConfig {
     /// What package manager to use.
@@ -227,6 +231,7 @@ pub enum UpdateSchedule {
 /// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct AllowedUpdate {
     #[serde(rename = "match")]
@@ -240,6 +245,7 @@ pub struct AllowedUpdate {
 /// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct AllowedUpdateMatch {
     /// Allow updates for dependencies with matching names, optionally using * to match zero or more characters.
@@ -291,6 +297,7 @@ pub enum AllowedUpdateType {
 /// [docs]: https://dependabot.com/docs/config-file/#ignored_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct IgnoredUpdate {
     #[serde(rename = "match")]
@@ -304,6 +311,7 @@ pub struct IgnoredUpdate {
 /// [docs]: https://dependabot.com/docs/config-file/#ignored_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct IgnoredUpdateMatch {
     /// Ignore updates for dependencies with matching names, optionally using * to match zero or more characters.
@@ -327,6 +335,7 @@ impl IgnoredUpdate {
 /// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct AutomergedUpdate {
     #[serde(rename = "match")]
@@ -340,6 +349,7 @@ pub struct AutomergedUpdate {
 /// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct AutomergedUpdateMatch {
     pub dependency_name: Option<String>,
@@ -412,6 +422,7 @@ pub enum VersionRequirementUpdate {
 /// [docs]: https://dependabot.com/docs/config-file/#commit_message
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct CommitMessage {
     /// Specify a prefix for all commit messages.

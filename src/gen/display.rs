@@ -104,6 +104,8 @@ impl fmt::Display for crate::v2::PackageEcosystem {
             Self::Npm => f.write_str("npm"),
             Self::Nuget => f.write_str("nuget"),
             Self::Pip => f.write_str("pip"),
+            Self::Pub => f.write_str("pub"),
+            Self::Swift => f.write_str("swift"),
             Self::Terraform => f.write_str("terraform"),
         }
     }
@@ -148,6 +150,15 @@ impl fmt::Display for crate::v2::CommitMessageInclude {
         }
     }
 }
+impl fmt::Display for crate::v2::UpdateType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::SemverMajor => f.write_str("version-update:semver-major"),
+            Self::SemverMinor => f.write_str("version-update:semver-minor"),
+            Self::SemverPatch => f.write_str("version-update:semver-patch"),
+        }
+    }
+}
 impl fmt::Display for crate::v2::InsecureExternalCodeExecution {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
@@ -167,11 +178,11 @@ impl fmt::Display for crate::v2::RebaseStrategy {
 impl fmt::Display for crate::v2::VersioningStrategy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::LockfileOnly => f.write_str("lockfile-only"),
             Self::Auto => f.write_str("auto"),
-            Self::Widen => f.write_str("widen"),
             Self::Increase => f.write_str("increase"),
             Self::IncreaseIfNecessary => f.write_str("increase-if-necessary"),
+            Self::LockfileOnly => f.write_str("lockfile-only"),
+            Self::Widen => f.write_str("widen"),
         }
     }
 }
@@ -181,11 +192,13 @@ impl fmt::Display for crate::v2::RegistryType {
             Self::ComposerRepository => f.write_str("composer-repository"),
             Self::DockerRegistry => f.write_str("docker-registry"),
             Self::Git => f.write_str("git"),
+            Self::HexOrganization => f.write_str("hex-organization"),
             Self::MavenRepository => f.write_str("maven-repository"),
             Self::NpmRegistry => f.write_str("npm-registry"),
             Self::NugetFeed => f.write_str("nuget-feed"),
             Self::PythonIndex => f.write_str("python-index"),
             Self::RubygemsServer => f.write_str("rubygems-server"),
+            Self::TerraformRegistry => f.write_str("terraform-registry"),
         }
     }
 }

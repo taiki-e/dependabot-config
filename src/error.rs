@@ -2,6 +2,7 @@ use core::fmt;
 use std::io;
 
 /// An error that occurred during parsing the Dependabot configuration.
+// TODO: in next breaking, add PhantomData<Box<dyn fmt::Display + Send + Sync>> to make error type !UnwindSafe & !RefUnwindSafe for forward compatibility.
 #[derive(Debug)]
 pub struct Error(ErrorKind);
 

@@ -43,7 +43,7 @@ for update in dependabot.updates {
     clippy::alloc_instead_of_core,
     clippy::exhaustive_enums,
     clippy::exhaustive_structs,
-    clippy::std_instead_of_alloc,
+    // clippy::std_instead_of_alloc,
     clippy::std_instead_of_core,
 )]
 #![allow(clippy::must_use_candidate)]
@@ -56,8 +56,6 @@ mod display;
 #[path = "gen/from_str.rs"]
 mod from_str;
 
-// TODO: https://github.com/taiki-e/dependabot-config/issues/2
-// mod convert;
 mod error;
 
 pub mod v1;

@@ -10,6 +10,20 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+This release updates v2 types based on the latest docs.
+
+- Add `v2::Dependabot::enable_beta_ecosystems` field.
+
+- Add `v2::PackageEcosystem::{Pub,Swift}` variants.
+
+- Add `v2::Ignore::update_types` field and `v2::UpdateType` enum.
+
+- Add `v2::Registry::key` field.
+
+- Add `v2::RegistryType::{HexOrganization,TerraformRegistry}` variants.
+
+- Documentation improvements.
+
 ## [0.3.1] - 2023-07-03
 
 - Fix build error from dependency when built with `-Z minimal-versions`.

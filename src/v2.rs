@@ -4,6 +4,9 @@
 //!
 //! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
+// TODO: change usize fields to u32?
+// TODO: add groups once stabilized (currently in beta): https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups
+
 use core::fmt;
 
 use indexmap::IndexMap;
@@ -16,10 +19,18 @@ use serde::{de, Deserialize, Serialize};
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Dependabot {
     #[serde(deserialize_with = "de_version")]
     version: u8,
+    /// Opt in to updates for ecosystems that are not yet generally available.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#enable-beta-ecosystems
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enable_beta_ecosystems: Option<bool>,
     /// Configuration options for private registries.
     #[serde(default, skip_serializing_if = "Registries::is_empty")]
     pub registries: Registries,
@@ -30,7 +41,12 @@ pub struct Dependabot {
 impl Dependabot {
     /// Creates a new `Dependabot`.
     pub fn new(updates: Vec<Update>) -> Self {
-        Self { version: 2, registries: Registries::default(), updates }
+        Self {
+            version: 2,
+            enable_beta_ecosystems: None,
+            registries: Registries::default(),
+            updates,
+        }
     }
 }
 
@@ -67,6 +83,7 @@ where
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Update {
     /// Package manager to use.
@@ -217,6 +234,10 @@ pub enum PackageEcosystem {
     Nuget,
     /// `pip`
     Pip,
+    /// `pub`
+    Pub,
+    /// `swift`
+    Swift,
     /// `terraform`
     Terraform,
 }
@@ -228,6 +249,7 @@ pub enum PackageEcosystem {
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduleinterval
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Schedule {
     /// How often to check for updates.
@@ -315,6 +337,7 @@ impl Default for Day {
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#allow
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Allow {
     /// Allow updates for dependencies with matching names, optionally using * to match zero or more characters.
@@ -353,6 +376,7 @@ pub enum DependencyType {
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#commit-message
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct CommitMessage {
     /// Specify a prefix for all commit messages.
@@ -382,6 +406,7 @@ pub enum CommitMessageInclude {
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#ignore
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Ignore {
     /// Ignore updates for dependencies with matching names, optionally using * to match zero or more characters.
@@ -389,13 +414,32 @@ pub struct Ignore {
     /// Ignore specific versions or ranges of versions.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub versions: Option<Vec<String>>,
+    /// Ignore types of updates, such as semver major, minor, or patch updates on version updates.
+    pub update_types: Option<Vec<UpdateType>>,
 }
 
 impl Ignore {
     /// Creates a new `Ignore`.
     pub fn new(dependency_name: String) -> Self {
-        Self { dependency_name, versions: None }
+        Self { dependency_name, versions: None, update_types: None }
     }
+}
+
+/// Types of updates, such as semver major, minor, or patch updates.
+#[allow(clippy::enum_variant_names)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+#[non_exhaustive]
+pub enum UpdateType {
+    /// `version-update:semver-major`
+    #[serde(rename = "version-update:semver-major")]
+    SemverMajor,
+    /// `version-update:semver-minor`
+    #[serde(rename = "version-update:semver-minor")]
+    SemverMinor,
+    /// `version-update:semver-patch`
+    #[serde(rename = "version-update:semver-patch")]
+    SemverPatch,
 }
 
 /// Allow or deny code execution in manifest files.
@@ -420,6 +464,7 @@ pub enum InsecureExternalCodeExecution {
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#pull-request-branch-nameseparator
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct PullRequestBranchName {
     /// Change separator for pull request branch names.
@@ -485,16 +530,16 @@ pub enum RebaseStrategy {
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
 pub enum VersioningStrategy {
-    /// Only create pull requests to update lockfiles. Ignore any new versions that would require package manifest changes.
-    LockfileOnly,
     /// Follow the default strategy described above.
     Auto,
-    /// Relax the version requirement to include both the new and old version, when possible.
-    Widen,
     /// Always increase the version requirement to match the new version.
     Increase,
     /// Increase the version requirement only when required by the new version.
     IncreaseIfNecessary,
+    /// Only create pull requests to update lockfiles. Ignore any new versions that would require package manifest changes.
+    LockfileOnly,
+    /// Relax the version requirement to include both the new and old version, when possible.
+    Widen,
 }
 
 /// Configuration options for private registries.
@@ -511,8 +556,10 @@ pub type Registries = IndexMap<String, Registry>;
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-private-registries
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Registry {
+    // TODO: use RegistryType
     /// Identifies the type of registry.
     #[serde(rename = "type")]
     pub type_: String,
@@ -521,13 +568,16 @@ pub struct Registry {
     /// The username that Dependabot uses to access the registry.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,
-    /// A reference to a Dependabot secret containing the password for the specified user. For more information, see "Managing encrypted secrets for Dependabot."
+    /// A reference to a Dependabot secret containing the password for the specified user.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub password: Option<String>,
-    /// A reference to a Dependabot secret containing an access token for this registry. For more information, see "Managing encrypted secrets for Dependabot."
+    /// A reference to a Dependabot secret containing an access key for this registry.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub key: Option<String>,
+    /// A reference to a Dependabot secret containing an access token for this registry.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
-    /// For registries with type: python-index, if the boolean value is true, pip resolves dependencies by using the specified URL rather than the base URL of the Python Package Index (by default <https://pypi.org/simple>).
+    /// For registries, if the boolean value is true, Dependabot will resolve dependencies by using the specified URL rather than the base URL of that specific ecosystem.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub replaces_base: Option<bool>,
 }
@@ -549,12 +599,25 @@ pub enum RegistryType {
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#docker-registry
     DockerRegistry,
-    /// The git type.
+    /// The `git` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#git
     Git,
+    /// The `hex-organization` type.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#hex-organization
+    HexOrganization,
+    // TODO: this type has some additional fields.
+    // /// The `hex-repository` type.
+    // ///
+    // /// See [GitHub Docs][docs] for more.
+    // ///
+    // /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#hex-repository
+    // HexRepository,
     /// The `maven-repository` type.
     ///
     /// See [GitHub Docs][docs] for more.
@@ -585,4 +648,10 @@ pub enum RegistryType {
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#rubygems-server
     RubygemsServer,
+    /// The `terraform-registry` type.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#terraform-registry
+    TerraformRegistry,
 }

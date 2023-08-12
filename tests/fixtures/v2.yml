@@ -1,24 +1,74 @@
 # https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
 ---
-# Basic set up for three package managers
-
 version: 2
+enable-beta-ecosystems: true
 updates:
-  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: 'bundler'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'cargo'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'hex'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'elm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'gitsubmodule'
+    directory: '/'
+    schedule:
+      interval: 'daily'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'daily'
-
-  # Maintain dependencies for npm
+  - package-ecosystem: 'gomod'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'gradle'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'maven'
+    directory: '/'
+    schedule:
+      interval: 'daily'
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'daily'
-
-  # Maintain dependencies for Composer
-  - package-ecosystem: 'composer'
+  - package-ecosystem: 'nuget'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'pub'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'swift'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'terraform'
     directory: '/'
     schedule:
       interval: 'daily'
@@ -162,6 +212,9 @@ updates:
         versions: ['4.x', '5.x']
         # For Lodash, ignore all updates
       - dependency-name: 'lodash'
+      - dependency-name: '@types/node'
+        # For Node types, ignore any patch versions
+        update-types: ['version-update:semver-patch']
 ---
 # Allow external code execution when updating dependencies from private registries
 

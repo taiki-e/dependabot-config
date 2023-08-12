@@ -13,6 +13,15 @@ registries:
     url: https://registry.hub.docker.com
     username: octocat
     password: ${{secrets.MY_DOCKERHUB_PASSWORD}}
+    replaces-base: true
+---
+registries:
+  ecr-docker:
+    type: docker-registry
+    url: https://1234567890.dkr.ecr.us-east-1.amazonaws.com
+    username: ${{secrets.ECR_AWS_ACCESS_KEY_ID}}
+    password: ${{secrets.ECR_AWS_SECRET_ACCESS_KEY}}
+    replaces-base: true
 ---
 registries:
   github-octocat:
@@ -22,11 +31,18 @@ registries:
     password: ${{secrets.MY_GITHUB_PERSONAL_TOKEN}}
 ---
 registries:
+  github-hex-org:
+    type: hex-organization
+    organization: github
+    key: ${{secrets.MY_HEX_ORGANIZATION_KEY}}
+---
+registries:
   maven-artifactory:
     type: maven-repository
     url: https://artifactory.example.com
     username: octocat
     password: ${{secrets.MY_ARTIFACTORY_PASSWORD}}
+    replaces-base: true
 ---
 registries:
   maven-github:
@@ -42,10 +58,19 @@ registries:
     password: ${{secrets.MY_NPM_PASSWORD}}
 ---
 registries:
+  npm-npmjs:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    username: octocat
+    password: ${{secrets.MY_NPM_PASSWORD}}
+    replaces-base: true
+---
+registries:
   npm-github:
     type: npm-registry
     url: https://npm.pkg.github.com
     token: ${{secrets.MY_GITHUB_PERSONAL_TOKEN}}
+    replaces-base: true
 ---
 registries:
   nuget-example:
@@ -58,7 +83,8 @@ registries:
   nuget-azure-devops:
     type: nuget-feed
     url: https://pkgs.dev.azure.com/.../_packaging/My_Feed/nuget/v3/index.json
-    token: ${{secrets.MY_AZURE_DEVOPS_TOKEN}}
+    username: octocat@example.com
+    password: ${{secrets.MY_AZURE_DEVOPS_TOKEN}}
 ---
 registries:
   python-example:
@@ -72,7 +98,8 @@ registries:
   python-azure:
     type: python-index
     url: https://pkgs.dev.azure.com/octocat/_packaging/my-feed/pypi/example
-    token: ${{secrets.MY_AZURE_DEVOPS_TOKEN}}
+    username: octocat@example.com
+    password: ${{secrets.MY_AZURE_DEVOPS_TOKEN}}
     replaces-base: true
 ---
 registries:
@@ -81,9 +108,17 @@ registries:
     url: https://rubygems.example.com
     username: octocat@example.com
     password: ${{secrets.MY_RUBYGEMS_PASSWORD}}
+    replaces-base: true
 ---
 registries:
   ruby-github:
     type: rubygems-server
     url: https://rubygems.pkg.github.com/octocat/github_api
     token: ${{secrets.MY_GITHUB_PERSONAL_TOKEN}}
+    replaces-base: true
+---
+registries:
+  terraform-example:
+    type: terraform-registry
+    url: https://terraform.example.com
+    token: ${{secrets.MY_TERRAFORM_API_TOKEN}}

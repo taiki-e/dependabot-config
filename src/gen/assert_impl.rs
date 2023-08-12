@@ -190,6 +190,11 @@ const _: fn() = || {
     assert_unpin::<crate::v2::Ignore>();
     assert_unwind_safe::<crate::v2::Ignore>();
     assert_ref_unwind_safe::<crate::v2::Ignore>();
+    assert_send::<crate::v2::UpdateType>();
+    assert_sync::<crate::v2::UpdateType>();
+    assert_unpin::<crate::v2::UpdateType>();
+    assert_unwind_safe::<crate::v2::UpdateType>();
+    assert_ref_unwind_safe::<crate::v2::UpdateType>();
     assert_send::<crate::v2::InsecureExternalCodeExecution>();
     assert_sync::<crate::v2::InsecureExternalCodeExecution>();
     assert_unpin::<crate::v2::InsecureExternalCodeExecution>();

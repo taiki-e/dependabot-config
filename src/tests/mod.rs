@@ -1,7 +1,8 @@
 #![warn(rust_2018_idioms, single_use_lifetimes)]
 
-use dependabot_config::{v1, v2, Dependabot};
 use serde::{Deserialize, Serialize};
+
+use crate::{v1, v2, Dependabot};
 
 #[test]
 #[cfg_attr(miri, ignore)] // Miri is too slow
