@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 //! The Dependabot v2 configuration.
 //!
 //! See [GitHub Docs][docs] for more.
