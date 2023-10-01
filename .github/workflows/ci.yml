@@ -78,8 +78,7 @@ jobs:
           persist-credentials: false
       - name: Install Rust
         run: rustup toolchain add nightly --no-self-update --component miri && rustup default nightly
-      - run: sudo apt-get -o Acquire::Retries=10 -qq update && sudo apt-get -o Acquire::Retries=10 -o Dpkg::Use-Pty=0 install -y --no-install-recommends moreutils
-      - run: cargo miri test --workspace --all-features $EXCLUDE 2>&1 | ts -i '%.s  '
+      - run: cargo miri test --workspace --all-features $EXCLUDE
         env:
           MIRIFLAGS: -Zmiri-strict-provenance -Zmiri-symbolic-alignment-check -Zmiri-disable-isolation
           RUSTDOCFLAGS: ${{ env.RUSTDOCFLAGS }} -Z randomize-layout
