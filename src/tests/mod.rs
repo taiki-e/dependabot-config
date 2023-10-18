@@ -2,7 +2,7 @@
 
 #![warn(rust_2018_idioms, single_use_lifetimes)]
 
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 
 use crate::{v1, v2, Dependabot};
 

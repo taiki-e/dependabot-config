@@ -12,7 +12,8 @@
 use core::fmt;
 
 use indexmap::IndexMap;
-use serde::{de, Deserialize, Serialize};
+use serde::de::{self, Deserialize, Deserializer};
+use serde_derive::{Deserialize, Serialize};
 
 /// The Dependabot v2 configuration.
 ///
@@ -67,7 +68,7 @@ impl ToString for Dependabot {
 #[allow(single_use_lifetimes)]
 fn de_version<'de, D>(deserializer: D) -> Result<u8, D::Error>
 where
-    D: de::Deserializer<'de>,
+    D: Deserializer<'de>,
 {
     let n: u8 = Deserialize::deserialize(deserializer)?;
     match n {
@@ -495,7 +496,7 @@ impl fmt::Display for Separator {
 impl<'de> Deserialize<'de> for Separator {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
-        D: de::Deserializer<'de>,
+        D: Deserializer<'de>,
     {
         let c: char = Deserialize::deserialize(deserializer)?;
         match c {

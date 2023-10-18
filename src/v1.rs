@@ -10,7 +10,8 @@
 
 // TODO: change usize fields to u32?
 
-use serde::{de, Deserialize, Serialize};
+use serde::de::{self, Deserialize, Deserializer};
+use serde_derive::{Deserialize, Serialize};
 
 /// The Dependabot v1 configuration.
 ///
@@ -50,7 +51,7 @@ impl ToString for Dependabot {
 #[allow(single_use_lifetimes)]
 fn de_version<'de, D>(deserializer: D) -> Result<u8, D::Error>
 where
-    D: de::Deserializer<'de>,
+    D: Deserializer<'de>,
 {
     let n: u8 = Deserialize::deserialize(deserializer)?;
     match n {

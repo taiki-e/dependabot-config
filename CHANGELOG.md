@@ -10,6 +10,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Improve compile time.
+
 ## [0.3.2] - 2023-08-12
 
 This release updates v2 types based on the latest GitHub docs.
