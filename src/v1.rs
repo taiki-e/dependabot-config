@@ -136,9 +136,9 @@ pub struct UpdateConfig {
 
 impl UpdateConfig {
     /// Creates a new `UpdateConfig`.
-    pub fn new(
+    pub fn new<D: Into<String>>(
         package_manager: PackageManager,
-        directory: impl Into<String>,
+        directory: D,
         update_schedule: UpdateSchedule,
     ) -> Self {
         Self {

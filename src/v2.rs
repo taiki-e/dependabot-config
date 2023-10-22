@@ -173,9 +173,9 @@ pub struct Update {
 
 impl Update {
     /// Creates a new `Update`.
-    pub fn new(
+    pub fn new<D: Into<String>>(
         package_ecosystem: PackageEcosystem,
-        directory: impl Into<String>,
+        directory: D,
         schedule: Schedule,
     ) -> Self {
         Self {
