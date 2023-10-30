@@ -65,7 +65,6 @@ impl ToString for Dependabot {
     }
 }
 
-#[allow(single_use_lifetimes)]
 fn de_version<'de, D>(deserializer: D) -> Result<u8, D::Error>
 where
     D: Deserializer<'de>,

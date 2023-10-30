@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-#![warn(rust_2018_idioms, single_use_lifetimes)]
-
 use serde_derive::{Deserialize, Serialize};
 
 use crate::{v1, v2, Dependabot};
@@ -67,10 +65,9 @@ struct TestRegistriesV2 {
 }
 
 #[track_caller]
-#[allow(single_use_lifetimes)]
-fn from_str<D>(s: &str) -> Vec<D>
+fn from_str<'de, D>(s: &str) -> Vec<D>
 where
-    D: for<'de> Deserialize<'de>,
+    D: Deserialize<'de>,
 {
     let mut buf = vec![];
     for document in serde_yaml::Deserializer::from_str(s) {
