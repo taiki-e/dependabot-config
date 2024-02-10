@@ -59,6 +59,7 @@ impl Default for Dependabot {
     }
 }
 
+#[allow(clippy::to_string_trait_impl)]
 impl ToString for Dependabot {
     fn to_string(&self) -> String {
         serde_yaml::to_string(&self).unwrap()

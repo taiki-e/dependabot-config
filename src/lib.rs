@@ -72,6 +72,7 @@ pub enum Dependabot {
     V1(v1::Dependabot),
 }
 
+#[allow(clippy::to_string_trait_impl)]
 impl ToString for Dependabot {
     fn to_string(&self) -> String {
         serde_yaml::to_string(&self).unwrap()
