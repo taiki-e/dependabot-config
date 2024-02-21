@@ -14,11 +14,7 @@ use anyhow::Result;
 use fs_err as fs;
 use heck::{ToKebabCase, ToSnakeCase};
 use quote::{format_ident, quote, ToTokens};
-use syn::{
-    punctuated::Punctuated,
-    visit_mut::{self, VisitMut},
-    *,
-};
+use syn::{punctuated::Punctuated, visit_mut::VisitMut, *};
 
 use crate::file::*;
 
