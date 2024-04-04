@@ -31,6 +31,7 @@ pub struct Dependabot {
 
 impl Dependabot {
     /// Creates a new `Dependabot`.
+    #[must_use]
     pub fn new(update_configs: Vec<UpdateConfig>) -> Self {
         Self { version: 1, update_configs }
     }
@@ -136,6 +137,7 @@ pub struct UpdateConfig {
 
 impl UpdateConfig {
     /// Creates a new `UpdateConfig`.
+    #[must_use]
     pub fn new<D: Into<String>>(
         package_manager: PackageManager,
         directory: D,
@@ -326,6 +328,7 @@ pub struct IgnoredUpdateMatch {
 
 impl IgnoredUpdate {
     /// Creates a new `Ignore`.
+    #[must_use]
     pub fn new(dependency_name: String) -> Self {
         Self { match_: IgnoredUpdateMatch { dependency_name, version_requirement: None } }
     }

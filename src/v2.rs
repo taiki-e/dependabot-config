@@ -43,6 +43,7 @@ pub struct Dependabot {
 
 impl Dependabot {
     /// Creates a new `Dependabot`.
+    #[must_use]
     pub fn new(updates: Vec<Update>) -> Self {
         Self {
             version: 2,
@@ -173,6 +174,7 @@ pub struct Update {
 
 impl Update {
     /// Creates a new `Update`.
+    #[must_use]
     pub fn new<D: Into<String>>(
         package_ecosystem: PackageEcosystem,
         directory: D,
@@ -280,6 +282,7 @@ pub struct Schedule {
 
 impl Schedule {
     /// Creates a new `Schedule`.
+    #[must_use]
     pub fn new(interval: Interval) -> Self {
         Self { interval, day: None, time: None, timezone: None }
     }
@@ -423,6 +426,7 @@ pub struct Ignore {
 
 impl Ignore {
     /// Creates a new `Ignore`.
+    #[must_use]
     pub fn new(dependency_name: String) -> Self {
         Self { dependency_name, versions: None, update_types: None }
     }
