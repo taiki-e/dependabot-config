@@ -10,6 +10,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+## [0.3.4] - 2024-04-13
+
 - Add `#[must_use]` to constructors.
 
 ## [0.3.3] - 2023-10-18
@@ -70,7 +72,8 @@ This release updates v2 types based on the latest GitHub docs.
 
 Initial release
 
-[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/taiki-e/dependabot-config/compare/v0.3.4...HEAD
+[0.3.4]: https://github.com/taiki-e/dependabot-config/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/taiki-e/dependabot-config/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/taiki-e/dependabot-config/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/taiki-e/dependabot-config/compare/v0.3.0...v0.3.1
