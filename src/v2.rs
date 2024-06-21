@@ -483,10 +483,9 @@ pub struct PullRequestBranchName {
 /// See [GitHub Docs][docs] for more.
 ///
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#pull-request-branch-nameseparator
+// Do not implement Copy because strings may be allowed in the future.
 #[derive(Debug, Clone, Serialize)]
 #[serde(transparent)]
-// Do not implement Copy because strings may be allowed in the future.
-#[allow(missing_copy_implementations)]
 pub struct Separator {
     repr: char,
 }
