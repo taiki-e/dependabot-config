@@ -3,7 +3,6 @@ name = "dependabot-config-internal-codegen"
 edition = "2021"
 
 [dependencies]
-anyhow = "1"
 fs-err = "2"
 globset = { version = "0.4", default-features = false }
 heck = "0.5"

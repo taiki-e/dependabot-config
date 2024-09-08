@@ -10,7 +10,6 @@ use std::{
     path::Path,
 };
 
-use anyhow::Result;
 use fs_err as fs;
 use heck::{ToKebabCase, ToSnakeCase};
 use quote::{format_ident, quote, ToTokens};
@@ -18,14 +17,13 @@ use syn::{punctuated::Punctuated, visit_mut::VisitMut, *};
 
 use crate::file::*;
 
-fn main() -> Result<()> {
-    gen_assert_impl()?;
-    gen_display()?;
-    gen_from_str()?;
-    Ok(())
+fn main() {
+    gen_assert_impl();
+    gen_display();
+    gen_from_str();
 }
 
-fn gen_from_str() -> Result<()> {
+fn gen_from_str() {
     let workspace_root = &workspace_root();
 
     let mut tokens = quote! {
@@ -36,8 +34,8 @@ fn gen_from_str() -> Result<()> {
     let files = &["src/lib.rs", "src/v1.rs", "src/v2.rs"];
 
     for &f in files {
-        let s = fs::read_to_string(workspace_root.join(f))?;
-        let mut ast = syn::parse_file(&s)?;
+        let s = fs::read_to_string(workspace_root.join(f)).unwrap();
+        let mut ast = syn::parse_file(&s).unwrap();
 
         let module = if f.ends_with("lib.rs") {
             vec![]
@@ -65,9 +63,7 @@ fn gen_from_str() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    write(function_name!(), workspace_root.join("src/gen/from_str.rs"), tokens)?;
-
-    Ok(())
+    write(function_name!(), workspace_root.join("src/gen/from_str.rs"), tokens).unwrap();
 }
 
 fn serde_attr(attrs: &[syn::Attribute], name: &str) -> Option<String> {
@@ -99,7 +95,7 @@ fn change_case(case: Option<&str>, value: String) -> String {
     }
 }
 
-fn gen_display() -> Result<()> {
+fn gen_display() {
     let workspace_root = &workspace_root();
 
     let mut tokens = quote! {
@@ -109,8 +105,8 @@ fn gen_display() -> Result<()> {
     let files = &["src/v1.rs", "src/v2.rs"];
 
     for &f in files {
-        let s = fs::read_to_string(workspace_root.join(f))?;
-        let mut ast = syn::parse_file(&s)?;
+        let s = fs::read_to_string(workspace_root.join(f)).unwrap();
+        let mut ast = syn::parse_file(&s).unwrap();
 
         let module = {
             let name = format_ident!("{}", Path::new(f).file_stem().unwrap().to_string_lossy());
@@ -149,12 +145,10 @@ fn gen_display() -> Result<()> {
         .visit_file_mut(&mut ast);
     }
 
-    write(function_name!(), workspace_root.join("src/gen/display.rs"), tokens)?;
-
-    Ok(())
+    write(function_name!(), workspace_root.join("src/gen/display.rs"), tokens).unwrap();
 }
 
-fn gen_assert_impl() -> Result<()> {
+fn gen_assert_impl() {
     const NOT_SEND: &[&str] = &[];
     const NOT_SYNC: &[&str] = &[];
     const NOT_UNPIN: &[&str] = &[];
@@ -163,9 +157,9 @@ fn gen_assert_impl() -> Result<()> {
 
     let workspace_root = &workspace_root();
     let out_dir = &workspace_root.join("src/gen");
-    fs::create_dir_all(out_dir)?;
+    fs::create_dir_all(out_dir).unwrap();
 
-    let files: BTreeSet<String> = git_ls_files(&workspace_root.join("src"), &["*.rs"])?
+    let files: BTreeSet<String> = git_ls_files(&workspace_root.join("src"), &["*.rs"])
         .into_iter()
         .filter_map(|(file_name, path)| {
             // Assertions are only needed for the library's public APIs.
@@ -180,8 +174,8 @@ fn gen_assert_impl() -> Result<()> {
     let mut visited_types = HashSet::new();
     let mut use_generics_helpers = false;
     for f in &files {
-        let s = fs::read_to_string(f)?;
-        let mut ast = syn::parse_file(&s)?;
+        let s = fs::read_to_string(f).unwrap();
+        let mut ast = syn::parse_file(&s).unwrap();
 
         let module = if f.ends_with("lib.rs") {
             vec![]
@@ -425,9 +419,7 @@ fn gen_assert_impl() -> Result<()> {
             #tokens
         };
     });
-    write(function_name!(), out_dir.join("assert_impl.rs"), out)?;
-
-    Ok(())
+    write(function_name!(), out_dir.join("assert_impl.rs"), out).unwrap();
 }
 
 #[must_use]
