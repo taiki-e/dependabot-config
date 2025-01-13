@@ -11,8 +11,8 @@ use std::{
 };
 
 use fs_err as fs;
-use heck::{ToKebabCase, ToSnakeCase};
-use quote::{format_ident, quote, ToTokens};
+use heck::{ToKebabCase as _, ToSnakeCase as _};
+use quote::{format_ident, quote, ToTokens as _};
 use syn::{punctuated::Punctuated, visit_mut::VisitMut, *};
 
 use crate::file::*;
