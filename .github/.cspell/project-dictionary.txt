@@ -1,6 +1,7 @@
 automerged
 gitsubmodule
 gomod
+hashbrown
 lockfiles
 rubygems
 unparse
