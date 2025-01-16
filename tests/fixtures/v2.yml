@@ -461,3 +461,16 @@ updates:
       - dockerhub # Allow version updates for dependencies in this registry
     schedule:
       interval: 'monthly'
+
+---
+# Specify locations of manifest files for each package manager using `directories`
+
+version: 2
+updates:
+  - package-ecosystem: 'bundler'
+    directories:
+      - '/frontend'
+      - '/backend'
+      - '/admin'
+    schedule:
+      interval: 'weekly'

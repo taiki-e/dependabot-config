@@ -6,6 +6,7 @@
 //!
 //! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
+// TODO: Update based on the latest docs
 // TODO: change usize fields to u32?
 // TODO: add groups once stabilized (currently in beta): https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups
 
@@ -97,7 +98,15 @@ pub struct Update {
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#directory
-    pub directory: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub directory: Option<String>,
+    /// Locations of package manifests.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#directories
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub directories: Option<Vec<String>>,
     /// How often to check for updates.
     pub schedule: Schedule,
     /// Customize which updates are allowed.
@@ -182,7 +191,8 @@ impl Update {
     ) -> Self {
         Self {
             package_ecosystem,
-            directory: directory.into(),
+            directory: Some(directory.into()),
+            directories: None,
             schedule,
             allow: None,
             assignees: None,
@@ -565,12 +575,12 @@ pub type Registries = IndexMap<String, Registry>;
 #[cfg_attr(test, serde(deny_unknown_fields))]
 #[non_exhaustive]
 pub struct Registry {
-    // TODO: use RegistryType
     /// Identifies the type of registry.
     #[serde(rename = "type")]
-    pub type_: String,
+    pub type_: RegistryType,
     /// The URL to use to access the dependencies in this registry. The protocol is optional. If not specified, https:// is assumed. Dependabot adds or ignores trailing slashes as required.
-    pub url: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
     /// The username that Dependabot uses to access the registry.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub username: Option<String>,

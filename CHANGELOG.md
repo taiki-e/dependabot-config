@@ -12,6 +12,14 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Add `v2::Update::directories`.
+
+- Make `v2::Update::directory` optional to reflect upstream change due to addition of `v2::Update::directories`.
+
+- Use `v2::RegistryType` in `v2::Registry::type_`.
+
+- Make `v2::Registry::url` optional.
+
 ## [0.3.4] - 2024-04-13
 
 - Add `#[must_use]` to constructors.
