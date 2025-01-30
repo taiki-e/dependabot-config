@@ -335,7 +335,7 @@ fn gen_assert_impl() {
                             assert_ref_unwind_safe::<crate:: #(#module::)* #ident #lt>();
                         });
                     }
-                };
+                }
             }
             _ => {}
         })
