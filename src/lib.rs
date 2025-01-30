@@ -45,7 +45,7 @@ for update in dependabot.updates {
 )]
 
 #[cfg(test)]
-#[path = "gen/assert_impl.rs"]
+#[path = "gen/tests/assert_impl.rs"]
 mod assert_impl;
 #[path = "gen/display.rs"]
 mod display;
