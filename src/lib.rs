@@ -1,26 +1,38 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
 /*!
+<!-- Note: Document from sync-markdown-to-rustdoc:start through sync-markdown-to-rustdoc:end
+     is synchronized from README.md. Any changes to that range are not preserved. -->
+<!-- tidy:sync-markdown-to-rustdoc:start -->
+
 Structured access to the [Dependabot] configuration file.
+
+## Usage
+
+Add this to your `Cargo.toml`:
+
+```toml
+[dependencies]
+dependabot-config = "0.3"
+```
 
 ## Examples
 
-```rust
-# fn dox() -> std::io::Result<()> {
+```
 use std::fs;
 
 use dependabot_config::v2::Dependabot;
 
-let s = fs::read_to_string(".github/dependabot.yml")?;
-let dependabot: Dependabot = s.parse()?;
+let s = fs::read_to_string(".github/dependabot.yml").unwrap();
+let dependabot: Dependabot = s.parse().unwrap();
 for update in dependabot.updates {
     println!("{}", update.package_ecosystem);
 }
-# Ok(())
-# }
 ```
 
 [dependabot]: https://docs.github.com/en/code-security/supply-chain-security/about-dependabot-version-updates
+
+<!-- tidy:sync-markdown-to-rustdoc:end -->
 */
 
 #![doc(test(
