@@ -35,6 +35,7 @@ serde_yaml = "0.9"
 [dev-dependencies]
 fs-err = "3"
 static_assertions = "1"
+test-helper = { features = ["git"], git = "https://github.com/taiki-e/test-helper.git", rev = "e8333e1" }
 
 [lints]
 workspace = true
@@ -53,6 +54,7 @@ non_ascii_idents = "warn"
 rust_2018_idioms = "warn"
 single_use_lifetimes = "warn"
 unexpected_cfgs = { level = "warn", check-cfg = [
+    'cfg(careful)',
 ] }
 unnameable_types = "warn"
 unreachable_pub = "warn"

@@ -63,6 +63,9 @@ mod assert_impl;
 mod display;
 #[path = "gen/from_str.rs"]
 mod from_str;
+#[cfg(test)]
+#[path = "gen/tests/track_size.rs"]
+mod track_size;
 
 mod error;
 
