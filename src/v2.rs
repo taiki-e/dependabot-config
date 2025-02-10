@@ -4,11 +4,9 @@
 //!
 //! See [GitHub Docs][docs] for more.
 //!
-//! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+//! [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 
-// TODO: Update based on the latest docs
 // TODO: change usize fields to u32?
-// TODO: add groups once stabilized (currently in beta): https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups
 
 use core::fmt;
 
@@ -20,7 +18,7 @@ use serde_derive::{Deserialize, Serialize};
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -562,14 +560,14 @@ pub enum VersioningStrategy {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-private-registries
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#top-level-registries-key
 pub type Registries = IndexMap<String, Registry>;
 
 /// Configuration options for private registry.
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-private-registries
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#top-level-registries-key
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
