@@ -2,7 +2,7 @@
 
 use std::path::PathBuf;
 
-use dependabot_config::{v1, v2, Dependabot};
+use dependabot_config::{Dependabot, v1, v2};
 use fs_err as fs;
 use serde::de::Deserialize;
 use serde_derive::{Deserialize, Serialize};
