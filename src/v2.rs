@@ -7,7 +7,6 @@
 //! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
 
 // TODO: Update based on the latest docs
-// TODO: change usize fields to u32?
 // TODO: add groups once stabilized (currently in beta): https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups
 
 use core::fmt;
@@ -141,14 +140,14 @@ pub struct Update {
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#milestone
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub milestone: Option<usize>,
+    pub milestone: Option<u32>,
     /// Limit number of open pull requests for version updates.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
     /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#open-pull-requests-limit
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub open_pull_requests_limit: Option<usize>,
+    pub open_pull_requests_limit: Option<u32>,
     /// Change separator for pull request branch names.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub pull_request_branch_name: Option<PullRequestBranchName>,

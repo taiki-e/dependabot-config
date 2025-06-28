@@ -12,13 +12,15 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
-- Add `v2::Update::directories`.
+- Add `v2::Update::directories` field.
 
-- Make `v2::Update::directory` optional to reflect upstream change due to addition of `v2::Update::directories`.
+- Make `v2::Update::directory` field optional to reflect upstream change due to addition of `v2::Update::directories`.
 
-- Use `v2::RegistryType` in `v2::Registry::type_`.
+- Change `v2::Registry::type_` field to use `v2::RegistryType` instead of `String`.
 
-- Make `v2::Registry::url` optional.
+- Change `v2::Update::{milestone,open_pull_requests_limit}` and `v1::UpdateConfig::default_milestone` fields to use `u32` instead of `usize`.
+
+- Make `v2::Registry::url` field optional.
 
 ## [0.3.4] - 2024-04-13
 

@@ -1,7 +1,7 @@
 dependabot_config::error::Error: 8
 dependabot_config::Dependabot: 104
 dependabot_config::v1::Dependabot: 32
-dependabot_config::v1::UpdateConfig: 272
+dependabot_config::v1::UpdateConfig: 264
 dependabot_config::v1::PackageManager: 1
 dependabot_config::v1::UpdateSchedule: 1
 dependabot_config::v1::AllowedUpdate: 32
@@ -17,7 +17,7 @@ dependabot_config::v1::AutomergedUpdateType: 1
 dependabot_config::v1::VersionRequirementUpdate: 1
 dependabot_config::v1::CommitMessage: 56
 dependabot_config::v2::Dependabot: 104
-dependabot_config::v2::Update: 352
+dependabot_config::v2::Update: 336
 dependabot_config::v2::PackageEcosystem: 1
 dependabot_config::v2::Schedule: 56
 dependabot_config::v2::Interval: 1

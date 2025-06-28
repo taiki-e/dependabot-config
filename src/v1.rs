@@ -8,8 +8,6 @@
 
 #![allow(missing_docs)]
 
-// TODO: change usize fields to u32?
-
 use serde::de::{self, Deserialize, Deserializer};
 use serde_derive::{Deserialize, Serialize};
 
@@ -117,7 +115,7 @@ pub struct UpdateConfig {
     ///
     /// [docs]: https://dependabot.com/docs/config-file/#default_milestone
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub default_milestone: Option<usize>,
+    pub default_milestone: Option<u32>,
     /// Limit which updates are allowed.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub allowed_updates: Option<Vec<AllowedUpdate>>,
