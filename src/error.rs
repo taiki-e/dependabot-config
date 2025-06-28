@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use core::fmt;
+use core::{fmt, marker::PhantomData};
 use std::io;
 
 /// An error that occurred during parsing the Dependabot configuration.
-// TODO: in next breaking, add PhantomData<Box<dyn fmt::Display + Send + Sync>> to make error type !UnwindSafe & !RefUnwindSafe for forward compatibility.
+// Using PhantomData to make error type !UnwindSafe & !RefUnwindSafe for forward compatibility.
 #[derive(Debug)]
-pub struct Error(ErrorKind);
+pub struct Error(ErrorKind, PhantomData<Box<dyn Send + Sync>>);
 
 // Hiding error variants from a library's public error type to prevent
 // dependency updates from becoming breaking changes.
@@ -20,7 +20,7 @@ pub(crate) enum ErrorKind {
 
 impl Error {
     pub(crate) fn new(e: impl Into<ErrorKind>) -> Self {
-        Self(e.into())
+        Self(e.into(), PhantomData)
     }
 }
 
