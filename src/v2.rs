@@ -252,11 +252,11 @@ pub enum PackageEcosystem {
     Gradle,
     /// `maven`
     Maven,
-    /// `npm`
+    /// `npm` (package manager "npm", "pnpm", or "yarn")
     Npm,
     /// `nuget`
     Nuget,
-    /// `pip`
+    /// `pip` (package manager "pip", "pip-compile", "pipenv", or "poetry")
     Pip,
     /// `pub`
     Pub,
