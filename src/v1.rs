@@ -4,7 +4,7 @@
 //!
 //! See [Dependabot Docs][docs] for more.
 //!
-//! [docs]: https://dependabot.com/docs/config-file
+//! [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file
 
 #![allow(missing_docs)]
 
@@ -15,7 +15,7 @@ use serde_derive::{Deserialize, Serialize};
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -65,7 +65,7 @@ where
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#available-configuration-options
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#available-configuration-options
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -77,7 +77,7 @@ pub struct UpdateConfig {
     ///
     /// See [Dependabot Docs][docs] for more.
     ///
-    /// [docs]: https://dependabot.com/docs/config-file/#directory-required
+    /// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#directory-required
     pub directory: String,
     /// How often to check for updates.
     pub update_schedule: UpdateSchedule,
@@ -85,35 +85,35 @@ pub struct UpdateConfig {
     ///
     /// See [Dependabot Docs][docs] for more.
     ///
-    /// [docs]: https://dependabot.com/docs/config-file/#target_branch
+    /// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#target_branch
     #[serde(skip_serializing_if = "Option::is_none")]
     pub target_branch: Option<String>,
     /// Reviewers to set on pull requests.
     ///
     /// See [Dependabot Docs][docs] for more.
     ///
-    /// [docs]: https://dependabot.com/docs/config-file/#default_reviewers
+    /// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#default_reviewers
     #[serde(skip_serializing_if = "Option::is_none")]
     pub default_reviewers: Option<Vec<String>>,
     /// Assignees to set on pull requests.
     ///
     /// See [Dependabot Docs][docs] for more.
     ///
-    /// [docs]: https://dependabot.com/docs/config-file/#default_assignees
+    /// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#default_assignees
     #[serde(skip_serializing_if = "Option::is_none")]
     pub default_assignees: Option<Vec<String>>,
     /// Labels to set on pull requests.
     ///
     /// See [Dependabot Docs][docs] for more.
     ///
-    /// [docs]: https://dependabot.com/docs/config-file/#default_labels
+    /// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#default_labels
     #[serde(skip_serializing_if = "Option::is_none")]
     pub default_labels: Option<Vec<String>>,
     /// Milestone to set on pull requests.
     ///
     /// See [Dependabot Docs][docs] for more.
     ///
-    /// [docs]: https://dependabot.com/docs/config-file/#default_milestone
+    /// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#default_milestone
     #[serde(skip_serializing_if = "Option::is_none")]
     pub default_milestone: Option<u32>,
     /// Limit which updates are allowed.
@@ -163,7 +163,7 @@ impl UpdateConfig {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#package_manager-required
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#package_manager-required
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -213,7 +213,7 @@ pub enum PackageManager {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#update_schedule-required
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#update_schedule-required
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -231,7 +231,7 @@ pub enum UpdateSchedule {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -245,7 +245,7 @@ pub struct AllowedUpdate {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -264,7 +264,7 @@ pub struct AllowedUpdateMatch {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -284,7 +284,7 @@ pub enum AllowedDependencyType {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#allowed_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#allowed_updates
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -297,7 +297,7 @@ pub enum AllowedUpdateType {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#ignored_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#ignored_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -311,7 +311,7 @@ pub struct IgnoredUpdate {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#ignored_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#ignored_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -336,7 +336,7 @@ impl IgnoredUpdate {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#automerged_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -350,7 +350,7 @@ pub struct AutomergedUpdate {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#automerged_updates
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -365,7 +365,7 @@ pub struct AutomergedUpdateMatch {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#automerged_updates
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -379,7 +379,7 @@ pub enum AutomergedDependencyType {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#automerged_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#automerged_updates
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -402,7 +402,7 @@ pub enum AutomergedUpdateType {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#version_requirement_updates
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#version_requirement_updates
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[non_exhaustive]
@@ -423,7 +423,7 @@ pub enum VersionRequirementUpdate {
 ///
 /// See [Dependabot Docs][docs] for more.
 ///
-/// [docs]: https://dependabot.com/docs/config-file/#commit_message
+/// [docs]: https://web.archive.org/web/20210520180451/https://dependabot.com/docs/config-file/#commit_message
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
