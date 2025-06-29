@@ -91,11 +91,16 @@ impl fmt::Display for crate::v1::VersionRequirementUpdate {
 impl fmt::Display for crate::v2::PackageEcosystem {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Self::Bun => f.write_str("bun"),
             Self::Bundler => f.write_str("bundler"),
             Self::Cargo => f.write_str("cargo"),
             Self::Composer => f.write_str("composer"),
+            Self::Devcontainers => f.write_str("devcontainers"),
             Self::Docker => f.write_str("docker"),
-            Self::Hex => f.write_str("hex"),
+            Self::DockerCompose => f.write_str("docker-compose"),
+            Self::DotnetSdk => f.write_str("dotnet-sdk"),
+            Self::Mix => f.write_str("mix"),
+            Self::Helm => f.write_str("helm"),
             Self::Elm => f.write_str("elm"),
             Self::Gitsubmodule => f.write_str("gitsubmodule"),
             Self::GithubActions => f.write_str("github-actions"),
@@ -108,6 +113,7 @@ impl fmt::Display for crate::v2::PackageEcosystem {
             Self::Pub => f.write_str("pub"),
             Self::Swift => f.write_str("swift"),
             Self::Terraform => f.write_str("terraform"),
+            Self::Uv => f.write_str("uv"),
         }
     }
 }
