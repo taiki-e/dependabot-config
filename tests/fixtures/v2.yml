@@ -40,7 +40,7 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-  - package-ecosystem: 'hex'
+  - package-ecosystem: 'mix' # for package manager "Hex"
     directory: '/'
     schedule:
       interval: 'daily'

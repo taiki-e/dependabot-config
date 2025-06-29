@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Renamed `v2::PackageEcosystem::Hex` to `v2::PackageEcosystem::Mix` (Hex is the package manager).
+
 - Add `v2::PackageEcosystem::{Bun,Devcontainers,DockerCompose,DotnetSdk,Helm,Uv}` variants.
 
 - Add `v2::Update::directories` field.

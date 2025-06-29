@@ -99,7 +99,7 @@ impl fmt::Display for crate::v2::PackageEcosystem {
             Self::Docker => f.write_str("docker"),
             Self::DockerCompose => f.write_str("docker-compose"),
             Self::DotnetSdk => f.write_str("dotnet-sdk"),
-            Self::Hex => f.write_str("hex"),
+            Self::Mix => f.write_str("mix"),
             Self::Helm => f.write_str("helm"),
             Self::Elm => f.write_str("elm"),
             Self::Gitsubmodule => f.write_str("gitsubmodule"),

@@ -236,8 +236,8 @@ pub enum PackageEcosystem {
     DockerCompose,
     /// `dotnet-sdk`
     DotnetSdk,
-    /// `mix`
-    Hex,
+    /// `mix` (package manager "Hex")
+    Mix,
     /// `helm`
     Helm,
     /// `elm`
