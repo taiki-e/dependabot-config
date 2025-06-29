@@ -12,19 +12,21 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
-- Renamed `v2::PackageEcosystem::Hex` to `v2::PackageEcosystem::Mix` (Hex is the package manager).
+- Rename `v2::PackageEcosystem::Hex` to `v2::PackageEcosystem::Mix` (Hex is the package manager). ([#15](https://github.com/taiki-e/dependabot-config/pull/15), thanks @reneleonhardt)
 
-- Add `v2::PackageEcosystem::{Bun,Devcontainers,DockerCompose,DotnetSdk,Helm,Uv}` variants.
+- Make `v2::Update::directory` field optional to reflect upstream change due to addition of `v2::Update::directories`. ([377dec7](https://github.com/taiki-e/dependabot-config/commit/377dec785615e90f2340b2afb9ab5748f21211c6))
 
-- Add `v2::Update::directories` field.
+- Make `v2::Registry::url` field optional. ([377dec7](https://github.com/taiki-e/dependabot-config/commit/377dec785615e90f2340b2afb9ab5748f21211c6))
 
-- Make `v2::Update::directory` field optional to reflect upstream change due to addition of `v2::Update::directories`.
+- Change `v2::Registry::type_` field to use `v2::RegistryType` instead of `String`. ([377dec7](https://github.com/taiki-e/dependabot-config/commit/377dec785615e90f2340b2afb9ab5748f21211c6))
 
-- Change `v2::Registry::type_` field to use `v2::RegistryType` instead of `String`.
+- Change `v2::Update::{milestone,open_pull_requests_limit}` and `v1::UpdateConfig::default_milestone` fields to use `u32` instead of `usize`. ([95d63f1](https://github.com/taiki-e/dependabot-config/commit/95d63f1cd755353bcea5d8eac5ef4a376bb2acbf))
 
-- Change `v2::Update::{milestone,open_pull_requests_limit}` and `v1::UpdateConfig::default_milestone` fields to use `u32` instead of `usize`.
+- Add `v2::PackageEcosystem::{Bun,Devcontainers,DockerCompose,DotnetSdk,Helm,Uv}` variants. ([#15](https://github.com/taiki-e/dependabot-config/pull/15), thanks @reneleonhardt)
 
-- Make `v2::Registry::url` field optional.
+- Add `v2::Update::directories` field. ([377dec7](https://github.com/taiki-e/dependabot-config/commit/377dec785615e90f2340b2afb9ab5748f21211c6))
+
+- Documentation improvements.
 
 ## [0.3.4] - 2024-04-13
 
