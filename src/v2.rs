@@ -84,7 +84,7 @@ where
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-updates
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#required-keys
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -96,14 +96,14 @@ pub struct Update {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#directory
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#directories-or-directory--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub directory: Option<String>,
     /// Locations of package manifests.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#directories
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#directories-or-directory--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub directories: Option<Vec<String>>,
     /// How often to check for updates.
@@ -115,7 +115,7 @@ pub struct Update {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#assignees
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#assignees--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub assignees: Option<Vec<String>>,
     /// Commit message preferences.
@@ -131,21 +131,21 @@ pub struct Update {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#labels
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#labels--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub labels: Option<Vec<String>>,
     /// Milestone to set on pull requests.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#milestone
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#milestone--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub milestone: Option<u32>,
     /// Limit number of open pull requests for version updates.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#open-pull-requests-limit
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#open-pull-requests-limit-
     #[serde(skip_serializing_if = "Option::is_none")]
     pub open_pull_requests_limit: Option<u32>,
     /// Change separator for pull request branch names.
@@ -158,21 +158,21 @@ pub struct Update {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#reviewers
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#reviewers--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reviewers: Option<Vec<String>>,
     /// Branch to create pull requests against.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#target-branch
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#target-branch-
     #[serde(skip_serializing_if = "Option::is_none")]
     pub target_branch: Option<String>,
     /// Update vendored or cached dependencies.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#vendor
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#vendor--
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendor: Option<bool>,
     /// How to update manifest version requirements.
@@ -272,7 +272,7 @@ pub enum PackageEcosystem {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduleinterval
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#schedule-
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -287,7 +287,7 @@ pub struct Schedule {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduletime
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#schedule-
     // TODO: Should we wrap this in its own type and verify the content?
     #[serde(skip_serializing_if = "Option::is_none")]
     pub time: Option<String>,
@@ -295,7 +295,7 @@ pub struct Schedule {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduletimezone
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#schedule-
     // TODO: Should we wrap this in its own type and verify the content?
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timezone: Option<String>,
@@ -313,7 +313,7 @@ impl Schedule {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduleinterval
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#schedule-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
@@ -330,7 +330,7 @@ pub enum Interval {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduleday
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#schedule-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
@@ -361,7 +361,7 @@ impl Default for Day {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#allow
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#allow--
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -379,7 +379,7 @@ pub struct Allow {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#allow
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#allow--
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
@@ -400,7 +400,7 @@ pub enum DependencyType {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#commit-message
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#commit-message--
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -430,7 +430,7 @@ pub enum CommitMessageInclude {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#ignore
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#ignore--
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -474,7 +474,7 @@ pub enum UpdateType {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#insecure-external-code-execution
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#insecure-external-code-execution--
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
@@ -489,7 +489,7 @@ pub enum InsecureExternalCodeExecution {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#pull-request-branch-nameseparator
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#pull-request-branch-nameseparator--
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -503,7 +503,7 @@ pub struct PullRequestBranchName {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#pull-request-branch-nameseparator
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#pull-request-branch-nameseparator--
 // Do not implement Copy because strings may be allowed in the future.
 #[derive(Debug, Clone, Serialize)]
 #[serde(transparent)]
@@ -537,7 +537,7 @@ impl<'de> Deserialize<'de> for Separator {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#rebase-strategy
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#rebase-strategy--
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
@@ -552,7 +552,7 @@ pub enum RebaseStrategy {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#versioning-strategy
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#versioning-strategy--
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
@@ -573,14 +573,14 @@ pub enum VersioningStrategy {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-private-registries
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#registries--
 pub type Registries = IndexMap<String, Registry>;
 
-/// Configuration options for private registry.
+/// Configuration options for a private registry.
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#configuration-options-for-private-registries
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#configuring-private-registries
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -614,71 +614,83 @@ pub struct Registry {
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
 pub enum RegistryType {
+    /// The `cargo-registry` type.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#cargo-registry
+    CargoRepository,
     /// The `composer-repository` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#composer-repository
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#composer-repository
     ComposerRepository,
     /// The `docker-registry` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#docker-registry
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#docker-registry
     DockerRegistry,
     /// The `git` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#git
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#git
     Git,
     /// The `hex-organization` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#hex-organization
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#hex-organization
     HexOrganization,
     // TODO: this type has some additional fields.
     // /// The `hex-repository` type.
     // ///
     // /// See [GitHub Docs][docs] for more.
     // ///
-    // /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#hex-repository
+    // /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#hex-repository
     // HexRepository,
     /// The `maven-repository` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#maven-repository
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#maven-repository
     MavenRepository,
     /// The `npm-registry` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#npm-registry
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#npm-registry
     NpmRegistry,
     /// The `nuget-feed` type
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#nuget-feed
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#nuget-feed
     NugetFeed,
+    /// The `pub-repository` type.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#pub-repository
+    PubRepository,
     /// The `python-index` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#python-index
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#python-index
     PythonIndex,
     /// The `rubygems-server` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#rubygems-server
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#rubygems-server
     RubygemsServer,
     /// The `terraform-registry` type.
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#terraform-registry
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#terraform-registry
     TerraformRegistry,
 }
