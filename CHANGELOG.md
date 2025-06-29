@@ -12,6 +12,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 ## [Unreleased]
 
+- Add `v2::PackageEcosystem::{Bun,Devcontainers,DockerCompose,DotnetSdk,Helm,Uv}` variants.
+
 - Add `v2::Update::directories` field.
 
 - Make `v2::Update::directory` field optional to reflect upstream change due to addition of `v2::Update::directories`.

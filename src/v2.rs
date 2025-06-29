@@ -215,21 +215,31 @@ impl Update {
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#package-ecosystem
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#package-ecosystem-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
 pub enum PackageEcosystem {
+    /// `bun`
+    Bun,
     /// `bundler`
     Bundler,
     /// `cargo`
     Cargo,
     /// `composer`
     Composer,
+    /// `devcontainers`
+    Devcontainers,
     /// `docker`
     Docker,
-    /// `hex`
+    /// `docker-compose`
+    DockerCompose,
+    /// `dotnet-sdk`
+    DotnetSdk,
+    /// `mix`
     Hex,
+    /// `helm`
+    Helm,
     /// `elm`
     Elm,
     /// `gitsubmodule`
@@ -254,6 +264,8 @@ pub enum PackageEcosystem {
     Swift,
     /// `terraform`
     Terraform,
+    /// `uv`
+    Uv,
 }
 
 /// How often to check for updates.
