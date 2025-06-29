@@ -196,13 +196,16 @@ impl fmt::Display for crate::v2::VersioningStrategy {
 impl fmt::Display for crate::v2::RegistryType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Self::CargoRepository => f.write_str("cargo-repository"),
             Self::ComposerRepository => f.write_str("composer-repository"),
             Self::DockerRegistry => f.write_str("docker-registry"),
             Self::Git => f.write_str("git"),
             Self::HexOrganization => f.write_str("hex-organization"),
+            Self::HexRepository => f.write_str("hex-repository"),
             Self::MavenRepository => f.write_str("maven-repository"),
             Self::NpmRegistry => f.write_str("npm-registry"),
             Self::NugetFeed => f.write_str("nuget-feed"),
+            Self::PubRepository => f.write_str("pub-repository"),
             Self::PythonIndex => f.write_str("python-index"),
             Self::RubygemsServer => f.write_str("rubygems-server"),
             Self::TerraformRegistry => f.write_str("terraform-registry"),
