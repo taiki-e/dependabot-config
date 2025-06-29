@@ -44,6 +44,14 @@ registries:
     key: ${{secrets.MY_HEX_ORGANIZATION_KEY}}
 ---
 registries:
+  github-hex-repository:
+    type: hex-repository
+    repo: private-repo
+    url: https://private-repo.example.com
+    auth-key: ${{secrets.MY_AUTH_KEY}}
+    public-key-fingerprint: ${{secrets.MY_PUBLIC_KEY_FINGERPRINT}}
+---
+registries:
   maven-artifactory:
     type: maven-repository
     url: https://artifactory.example.com

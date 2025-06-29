@@ -644,13 +644,12 @@ pub enum RegistryType {
     ///
     /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#hex-organization
     HexOrganization,
-    // TODO: this type has some additional fields.
-    // /// The `hex-repository` type.
-    // ///
-    // /// See [GitHub Docs][docs] for more.
-    // ///
-    // /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#hex-repository
-    // HexRepository,
+    /// The `hex-repository` type.
+    ///
+    /// See [GitHub Docs][docs] for more.
+    ///
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#hex-repository
+    HexRepository,
     /// The `maven-repository` type.
     ///
     /// See [GitHub Docs][docs] for more.

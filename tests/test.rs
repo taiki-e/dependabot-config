@@ -49,7 +49,7 @@ fn test_v2() {
 
     let v2_registries_test_data =
         &*fs::read_to_string(fixtures_dir().join("v2_registries.yml")).unwrap();
-    assert_eq!(from_str::<serde_yaml::Value>(v2_registries_test_data).len(), 19);
+    assert_eq!(from_str::<serde_yaml::Value>(v2_registries_test_data).len(), 20);
     for case in from_str::<TestRegistriesV2>(v2_registries_test_data) {
         serde_yaml::to_string(&case).unwrap();
     }
