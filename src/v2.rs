@@ -4,7 +4,7 @@
 //!
 //! See [GitHub Docs][docs] for more.
 //!
-//! [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+//! [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 
 // TODO: Update based on the latest docs
 // TODO: add groups once stabilized (currently in beta): https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups
@@ -19,7 +19,7 @@ use serde_derive::{Deserialize, Serialize};
 ///
 /// See [GitHub Docs][docs] for more.
 ///
-/// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+/// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(test, serde(deny_unknown_fields))]
@@ -31,7 +31,7 @@ pub struct Dependabot {
     ///
     /// See [GitHub Docs][docs] for more.
     ///
-    /// [docs]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#enable-beta-ecosystems
+    /// [docs]: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#enable-beta-ecosystems-
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enable_beta_ecosystems: Option<bool>,
     /// Configuration options for private registries.

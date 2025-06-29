@@ -33,7 +33,7 @@ for update in dependabot.updates {
 }
 ```
 
-[dependabot]: https://docs.github.com/en/code-security/supply-chain-security/about-dependabot-version-updates
+[dependabot]: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates
 
 <!-- tidy:sync-markdown-to-rustdoc:end -->
 
