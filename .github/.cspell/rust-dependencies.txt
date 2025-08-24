@@ -4,3 +4,4 @@
 globset
 indexmap
 prettyplease
+rustversion
