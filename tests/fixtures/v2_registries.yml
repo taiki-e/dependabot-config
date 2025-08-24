@@ -1,4 +1,11 @@
-# https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/configuring-access-to-private-registries-for-dependabot#supported-private-registries
+---
+registries:
+  cargo-example:
+    type: cargo-repository
+    registry: 'name-of-your-registry'
+    url: https://cargo.cloudsmith.io/foobaruser/test/
+    token: 'Token ${{secrets.CARGO_TOKEN}}'
 ---
 registries:
   composer:
@@ -35,6 +42,14 @@ registries:
     type: hex-organization
     organization: github
     key: ${{secrets.MY_HEX_ORGANIZATION_KEY}}
+---
+registries:
+  github-hex-repository:
+    type: hex-repository
+    repo: private-repo
+    url: https://private-repo.example.com
+    auth-key: ${{secrets.MY_AUTH_KEY}}
+    public-key-fingerprint: ${{secrets.MY_PUBLIC_KEY_FINGERPRINT}}
 ---
 registries:
   maven-artifactory:
@@ -85,6 +100,12 @@ registries:
     url: https://pkgs.dev.azure.com/.../_packaging/My_Feed/nuget/v3/index.json
     username: octocat@example.com
     password: ${{secrets.MY_AZURE_DEVOPS_TOKEN}}
+---
+registries:
+  my-pub-registry:
+    type: pub-repository
+    url: https://example-private-pub-repo.dev/optional-path
+    token: ${{secrets.MY_PUB_TOKEN}}
 ---
 registries:
   python-example:
