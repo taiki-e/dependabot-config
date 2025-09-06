@@ -331,11 +331,12 @@ pub enum Interval {
 /// See [GitHub Docs][docs] for more.
 ///
 /// [docs]: https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#scheduleday
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[non_exhaustive]
 pub enum Day {
     /// Monday.
+    #[default]
     Monday,
     /// Tuesday.
     Tuesday,
@@ -349,12 +350,6 @@ pub enum Day {
     Saturday,
     /// Sunday.
     Sunday,
-}
-
-impl Default for Day {
-    fn default() -> Self {
-        Self::Monday
-    }
 }
 
 /// Customize which updates are allowed.
