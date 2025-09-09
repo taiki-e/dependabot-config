@@ -1,5 +1,4 @@
 automerged
-devcontainers
 gitsubmodule
 gomod
 hashbrown
