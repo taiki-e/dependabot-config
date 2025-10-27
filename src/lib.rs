@@ -74,7 +74,7 @@ pub mod v2;
 
 use serde_derive::{Deserialize, Serialize};
 
-pub use crate::error::Error;
+pub use self::error::Error;
 
 /// The Dependabot configuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
