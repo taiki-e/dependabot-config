@@ -1,7 +1,6 @@
 automerged
 gitsubmodule
 gomod
-hashbrown
 lockfiles
 pipenv
 rubygems
