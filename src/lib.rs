@@ -35,6 +35,7 @@ for update in dependabot.updates {
 <!-- tidy:sync-markdown-to-rustdoc:end -->
 */
 
+#![no_std]
 #![doc(test(
     no_crate_inject,
     attr(allow(
@@ -58,6 +59,9 @@ for update in dependabot.updates {
     clippy::std_instead_of_core,
 )]
 
+extern crate alloc;
+extern crate std;
+
 #[cfg(test)]
 #[path = "gen/tests/assert_impl.rs"]
 mod assert_impl;
@@ -73,6 +77,8 @@ mod error;
 
 pub mod v1;
 pub mod v2;
+
+use alloc::string::{String, ToString};
 
 use serde_derive::{Deserialize, Serialize};
 
