@@ -2,17 +2,17 @@
 
 #![allow(clippy::needless_pass_by_value, clippy::wildcard_imports)]
 
-#[macro_use]
-mod file;
-
 use std::path::Path;
 
 use fs_err as fs;
 use heck::{ToKebabCase as _, ToSnakeCase as _};
 use quote::{format_ident, quote};
 use syn::{punctuated::Punctuated, *};
+use test_helper::{bin_name, codegen::file, function_name};
 
-use crate::file::*;
+fn workspace_root() -> &'static Path {
+    Path::new(env!("CARGO_MANIFEST_DIR").strip_suffix("tools/codegen").unwrap())
+}
 
 fn main() {
     gen_from_str();
@@ -22,7 +22,7 @@ fn main() {
 }
 
 fn gen_from_str() {
-    let workspace_root = &workspace_root();
+    let workspace_root = workspace_root();
 
     let mut tokens = quote! {
         use core::str::FromStr;
@@ -60,7 +60,13 @@ fn gen_from_str() {
         });
     }
 
-    write(function_name!(), workspace_root.join("src/gen/from_str.rs"), tokens).unwrap();
+    file::write(
+        function_name!(),
+        bin_name!(),
+        workspace_root,
+        workspace_root.join("src/gen/from_str.rs"),
+        tokens,
+    );
 }
 
 fn serde_attr(attrs: &[syn::Attribute], name: &str) -> Option<String> {
@@ -93,7 +99,7 @@ fn change_case(case: Option<&str>, value: String) -> String {
 }
 
 fn gen_display() {
-    let workspace_root = &workspace_root();
+    let workspace_root = workspace_root();
 
     let mut tokens = quote! {
         use core::fmt;
@@ -141,12 +147,19 @@ fn gen_display() {
         });
     }
 
-    write(function_name!(), workspace_root.join("src/gen/display.rs"), tokens).unwrap();
+    file::write(
+        function_name!(),
+        bin_name!(),
+        workspace_root,
+        workspace_root.join("src/gen/display.rs"),
+        tokens,
+    );
 }
 
 fn gen_assert_impl() {
+    let workspace_root = workspace_root();
     let (path, out) = test_helper::codegen::gen_assert_impl(
-        &workspace_root(),
+        workspace_root,
         test_helper::codegen::AssertImplConfig {
             exclude: &[],
             not_send: &[],
@@ -156,13 +169,14 @@ fn gen_assert_impl() {
             not_ref_unwind_safe: &["error::Error"],
         },
     );
-    write(function_name!(), path, out).unwrap();
+    file::write(function_name!(), bin_name!(), workspace_root, path, out);
 }
 
 fn gen_track_size() {
+    let workspace_root = workspace_root();
     let (path, out) = test_helper::codegen::gen_track_size(
-        &workspace_root(),
+        workspace_root,
         test_helper::codegen::TrackSizeConfig { exclude: &[] },
     );
-    write(function_name!(), path, out).unwrap();
+    file::write(function_name!(), bin_name!(), workspace_root, path, out);
 }

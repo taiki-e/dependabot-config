@@ -36,7 +36,7 @@ serde_yaml = "0.9"
 fs-err = "3"
 rustversion = "1"
 static_assertions = "1"
-test-helper = { features = ["git"], git = "https://github.com/taiki-e/test-helper.git", rev = "c5eac31" }
+test-helper = { features = ["git"], git = "https://github.com/taiki-e/test-helper.git", rev = "c78a65c" }
 
 [lints]
 workspace = true
