@@ -28,6 +28,8 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 
 - Documentation improvements.
 
+- Enable [release immutability](https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/immutable-releases).
+
 ## [0.3.4] - 2024-04-13
 
 - Add `#[must_use]` to constructors.
